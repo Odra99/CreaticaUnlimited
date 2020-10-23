@@ -1,13 +1,12 @@
 <?php 
 $error=''; // Variable para almacenar el mensaje de error
-$url='';  //url de redireccion
+$url = "registrar.php";  //url de redireccion
 if (!(isset($_POST['usuario']) || isset($_POST['clave'])
 || isset($_POST['nombre'])
 || isset($_POST['correo'])
 || isset($_POST['telefono'])
 || isset($_POST['apellidos'])
 || isset($_POST['rol']))) {
-$url = "registrar.php";
 }else{
     $user=$_POST['usuario'];
     $clave=$_POST['clave'];
@@ -27,9 +26,8 @@ try {
     $connection = new PDO("mysql:host=".HOST.";dbname=".DATABASE, USER, PASSWORD);
 } catch (PDOException $e) {}   
 $sql ="INSERT INTO PERFIL VALUES('".$nombre."','".$apelido."','".$email."','".$telefono."','".$user."','".$clave."');";
-$resultado = $connection->query($sql);
-if (isset($resultado)){
-    $url='index.php';
+
+if ($connection->query($sql)){
     switch ($rol) {
         case '1':
             $sql="INSERT INTO ESTUDIANTE values ('".$user."');";
@@ -40,9 +38,11 @@ if (isset($resultado)){
         default:
        break;
     }
-    //$resultado = $connection->query($sql);
+    $resultado = $connection->query($sql);
+    $url="index.php";
 }
 
-    
+header("location: ".$url);
+
 }
 ?>

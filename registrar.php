@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="css/imagehover.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
-  <body>
+  <body >
   <!--Navigation bar-->
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -29,37 +29,37 @@
       </div>
     </div>
   </nav>
-  
-    <div class="container">
+    <br><br><br>
+    <div class="container" style="width: 50%; ">
       <h1>Ingresar datos Usuario Nuevo</h1>
       <form action="crearUsuario.php" method="post">
         <div class="form-group">
             <label for="exampleInputPassword1">Nombre</label>
-            <input type="text" class="form-control" name="nombre" id="exampleInputPassword1" placeholder="nombre">
+            <input type="text" class="form-control" required name="nombre" id="exampleInputPassword1" placeholder="nombre">
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Usuario</label>
-            <input type="text" class="form-control" name="usuario" id="exampleInputPassword1" placeholder="usuario">
+            <input type="text" class="form-control" required name="usuario" id="exampleInputPassword1" placeholder="usuario">
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Apellidos</label>
-            <input type="text" class="form-control" name="apellidos" id="exampleInputPassword1" placeholder="apellidos">
+            <input type="text" class="form-control" required name="apellidos" id="exampleInputPassword1" placeholder="apellidos">
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Telefono</label>
-            <input type="number" class="form-control" name="telefono" id="exampleInputPassword1" placeholder="Telefono" maxlength="8">
+            <input type="number" class="form-control" required name="telefono" id="exampleInputPassword1" placeholder="Telefono" maxlength="8" max="99999999">
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" name="clave" id="exampleInputPassword1" placeholder="Password">
+            <input type="password" class="form-control" required name="clave" id="exampleInputPassword1" placeholder="Password">
         </div>
         <div class="form-group">
           <label for="exampleInputEmail1">Email</label>
-          <input type="email" name="correo" class="form-control" name="correo" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Correo electronico">
+          <input type="email" name="correo" class="form-control" required name="correo" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Correo electronico">
         </div>
         <div class="form-group">
           <label for="exampleInputEmail1">Rol</label>
-          <select name="rol" id="">
+          <select name="rol" required id="">
             <option value="1">Estudiante</option>
             <option value="2">Maestro</option>       
           </select>
