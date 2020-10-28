@@ -107,7 +107,7 @@ if(!$_SESSION['user']){
                   <h3 class="mb-0">Mi cuenta</h3>
                 </div>
                 <div class="col-4 text-right">
-                  <a href="#" class="btn btn-sm btn-primary"><i class="fas fa-save"></i> Guardar</a>
+                  <button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-save"></i> Guardar</button>
                 </div>
               </div>
             </div>
