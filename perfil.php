@@ -99,7 +99,8 @@ if(!$_SESSION['user']){
           </div>
         </div>
         <div class="col-xl-6 order-xl-2">
-            <form>
+            <form action="Backend/guardarPerfil.php" method="post">
+              <input type="text" value="../perfil.php" name="direccion" hidden/>
           <div class="card bg-secondary shadow">
             <div class="card-header bg-white border-0">
               <div class="row align-items-center">
@@ -119,6 +120,7 @@ if(!$_SESSION['user']){
                     <div class="col-lg-6">
                       <div class="form-group focused">
                         <label class="form-control-label" for="input-username">Usuario</label>
+                            <input type="text" name="usuarioAntiguo"  hidden value="<?php echo $usuario['usuario']  ?>" />
                         <input type="text" name="usuario" class="form-control form-control-alternative" placeholder="Username" value="<?php echo $usuario['usuario']  ?>" />
                       </div>
                     </div>
@@ -139,13 +141,13 @@ if(!$_SESSION['user']){
                     <div class="col-lg-4">
                       <div class="form-group focused">
                         <label class="form-control-label" for="input-last-name">Apellido</label>
-                        <input type="text" name="apellidos" class="form-control form-control-alternative" placeholder="Apellido"  value="<?php echo $usuario['apellido']  ?>"/>
+                        <input type="text" name="apellido" class="form-control form-control-alternative" placeholder="Apellido"  value="<?php echo $usuario['apellido']  ?>"/>
                       </div>
                     </div>
                     <div class="col-lg-4">
                       <div class="form-group focused">
                         <label class="form-control-label" for="input-last-name">contraseña</label>
-                        <input type="password" name="contraseña" class="form-control form-control-alternative" placeholder="******"  value="<?php echo $usuario['password']  ?>" />
+                        <input type="password" name="password" class="form-control form-control-alternative" placeholder="******"  value="<?php echo $usuario['password']  ?>" />
                       </div>
                     </div>
                   </div>
@@ -170,7 +172,7 @@ if(!$_SESSION['user']){
                 <div class="pl-lg-4">
                   <div class="form-group focused">
                     <label>Acerca de mi </label>
-                    <textarea  name="descripcion"rows="4" class="form-control form-control-alternative" placeholder="Descripcion"></textarea>
+                    <textarea  name="descripcion"rows="4" class="form-control form-control-alternative" placeholder="Descripcion"> <?php echo $usuario['descripcion']  ?></textarea>
                   </div>
                 </div>
 
