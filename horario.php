@@ -26,41 +26,36 @@ if(!$_SESSION['user']){
  <?php include("navAdministrador.html"); ?>
  <section id="contact" class="section-padding" style="margin-top:150px;">
    <div class="container">
-     <div class="row">
+     <div class="row ">
        <div class="header-section text-center">
          <h2>Agregar Horario </h2>
          <h3 style="color: red;"> <?php echo isset($_GET['error']) ? $_GET['error'] : ''; ?></h3>
          <hr class="bottom-line">
        </div>
-       <form action="Backend/guardarHorario.php" method="POST" role="form" class="contactForm">
-         <div class="col-md-5 col-sm-5 col-xs-12 left">
-          <p><label>Curso:</label><br><input type='text' name='nombre' value='' class='auto'></p>
+       <form action="Backend/guardarHorario.php" method="POST" role="form" class="contactForm col-md-12">
+         <div class="col-md-5 col-sm-5 col-xs-12 left" style="padding-left: 20%;">
+          <p><label>Curso:</label><br><input  required type='text' name='nombre' value='' class='auto'></p>
+
            <div class="form-group">
              <label><i class="far fa-calendar-alt"></i> Fecha Inicio</label></br>
-            <input type="date" min="<?php echo $fechaInicio ?>" max="<?php echo $fechaFin?>" />
+            <input type="date" name="fechaInicio" min="<?php echo $fechaInicio ?>" max="<?php echo $fechaFin?>" required/>
            </div>
            <div class="form-group">
-             <label><i class="far fa-calendar-alt"></i> Fecha Fin</label></br>
-            <input type="date" min="<?php echo $fechaInicio?>" max="<?php echo $fechaFin?>" />
-           </div>
+           <label><i class="far fa-calendar-alt"></i> Fecha Fin</label></br>
+          <input type="date" name="fechaFin" min="<?php echo $fechaInicio?>" max="<?php echo $fechaFin?>" required />
          </div>
-         <div class="col-md-7 col-sm-7 col-xs-12 right">
-           <p><label><i class="fas fa-chalkboard-teacher"></i> Maestro:</label><br><input type='text' name='nombreMaestro' value='' class='maestro'></p>
-           <div class="form-group" style="width: 25%;" >
-               <label>Dias </label></br>
-               <fieldset>
-                 <input type="checkbox" name="lunes"  value="lunes" /><label for="lunes">.  Lunes</label><br/>
-                 <input type="checkbox" name="martes"  value="martes"  /><label for="martes">.  Martes</label><br />
-                 <input type="checkbox" name="miercoles"  value="miercoles" /><label for="miercoles">.  Miercoles</label><br />
-                 <input type="checkbox" name="jueves"  value="jueves" /><label for="jueves">. Jueves</label><br />
-                 <input type="checkbox" name="viernes"  value="viernes" /><label for="viernes">. Viernes</label><br />
-                 <input type="checkbox" name="sabado"  value="sabado" /><label for="sabado">. Sabado</label><br />
-                 <input type="checkbox" name="domingo"  value="domingo" /><label for="domingo">. Domingo</label><br />
-               </fieldset>
-           </div>
+         </div>
+         <div class="col-md-7 col-sm-7  right " style="padding-left: 15%;">
+           <p><label><i class="fas fa-user"></i> Usuario:</label><br><input style="width:75%;" required type='text' onchange="myfuncion()" id="usuario" name='usuario'  value='' class='usuario'></p>
+            <p><label><i class="fas fa-chalkboard-teacher"></i> Maestro:</label><br><input style="width:75%;" required type='text'  id="nombreMaestro"   readonly></p>
+            <div class="form-group">
+              <label><i class="fas fa-chalkboard"></i> Clases </label></br>
+             <input type="number" name="clases" min="1" required />
+            </div>
+
          </div>
          <div class="col-md-12 align-items-center">
-           <button type="submit" class="btn btn-green col-lg-4" style="margin-left:35%;"><i class="far fa-plus-square"></i> Crear</button>
+           <button type="submit" class="btn btn-green col-lg-4" style="margin-left:35%;"><i class="far fa-plus-square"></i> Agregar</button>
          </div>
        </form>
      </div>
@@ -76,8 +71,33 @@ if(!$_SESSION['user']){
       $(".auto").autocomplete({
           source: "curso.php",
           minLength: 1
+
+      });
+
+  });
+
+
+
+  $(function() {
+      $(".usuario").autocomplete({
+          source: "maestroUsuario.php",
+          minLength: 1
       });
   });
+  function myfuncion(){
+
+       var xmlhttp = new XMLHttpRequest();
+     var dbParam =   document.getElementById("usuario").value;
+       xmlhttp.onreadystatechange = function() {
+
+           var myObj = JSON.parse(this.responseText);
+           document.getElementById("nombreMaestro").value = myObj.name;
+
+       };
+       xmlhttp.open("GET", "maestroNombre.php?term="+dbParam, false);
+       xmlhttp.send();
+
+  }
   </script>
 </body>
 </html>
