@@ -72,16 +72,7 @@ if($resultado[0]==1){
         }
   }
   header("location: paginaPrincipalMaestro.php");
- /*
- CREATE DEFINER=`root`@`localhost` TRIGGER `HORARIO_BEFORE_INSERT` BEFORE INSERT ON `HORARIO` FOR EACH ROW BEGIN
-  declare x int;
-  set x=0;
-  set x=(SELECT 1 FROM HORARIO WHERE curso=NEW.curso AND area=NEW.area AND año=NEW.año);
-  IF x=1 THEN
-    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = "Error, ya existe un registro previo";
-  END IF;
-END
- */ 
+
 }
 
 ?>
