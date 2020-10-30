@@ -53,8 +53,7 @@ header("location: paginaPrincipal.php");
           <h4 class="modal-title text-center form-title">Ingresar Sesion</h4>
         </div>
         <div class="modal-body padtrbl">
-
-          <div class="login-box-body">
+         <div class="login-box-body">
             <p class="login-box-msg">Inicia tu sesion</p>
             <div class="form-group">
               <form action="inicioSesion.php" method="post" >
@@ -75,7 +74,6 @@ header("location: paginaPrincipal.php");
           </div>
         </div>
       </div>
-
     </div>
   </div>
 

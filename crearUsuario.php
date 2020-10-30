@@ -28,17 +28,8 @@ try {
 $sql ="INSERT INTO PERFIL VALUES('".$nombre."','".$apelido."','".$email."','".$telefono."','".$user."','".$clave."');";
 
 if ($connection->query($sql)){
-    switch ($rol) {
-        case '1':
-            $sql="INSERT INTO ESTUDIANTE values ('".$user."');";
-        break;
-        case '2':
-            $sql="INSERT INTO MAESTRO values ('1','".$user."');";
-        break;
-        default:
-       break;
-    }
-    $resultado = $connection->query($sql);
+    $sql="call registrarPerfil('".$user."',".$rol.");";
+    $connection->query($sql);
     $url="index.php";
 }
 

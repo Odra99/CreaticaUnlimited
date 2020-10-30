@@ -12,18 +12,12 @@ if(!$_SESSION['user']){
   } catch (PDOException $e) {
       exit("Error: " . $e->getMessage());
   }
-  $sql="SELECT c.nombre AS nombre, c.area As area, h.usuarioMaestro,hs.lunes,hs.martes,hs.miercoles ";
-  $sql.=",hs.jueves,hs.viernes,hs.sabado,hs.domingo, h.duracion ,h.codigo, p.nombre  AS maestro";
-  $sql.=" FROM CURSO c INNER JOIN HORARIO h ON c.area=h.area ";
-  $sql.="AND h.curso=c.nombre INNER JOIN HORARIOSEMANA hs ON hs.codigo=h.codigo  ";
-  $sql.="INNER JOIN PERFIL p ON h.usuarioMaestro=p.usuario  WHERE h.año=(SELECT YEAR(NOW())) ";
-  
-  
+  $sql ="SELECT nombre, area FROM CURSO";
   if(isset($_POST['buscar']))
       {
-        $sql.=" AND c.nombre LIKE '%".$_POST['curso']."%'";
+        $sql.=" WHERE nombre LIKE '%".$_POST['curso']."%'";
       }
-  $sql.=" ORDER BY c.nombre;";
+  $sql.="ORDER BY nombre;";
   $resultado = $connection->query($sql);
   $cont =1;
 
@@ -61,21 +55,15 @@ if(!$_SESSION['user']){
         <ul class="nav navbar-nav navbar-right">
           <li><a href="cerrarSesion.php" >Cerrar sesion</a></li>
         </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="cursosMaestro.php" >Ver clases</a></li>
+        </ul>
+        
       </div>
     </div>
   </nav>
-  <style>
-    .l ,.m,.mm,.j,.v,.s,.d  {
-      display: none;
-    }
-    .l h3,.m h3,.mm h3,.j h3,.v h3,.s h3,.d  h3 {
-      font-size: 15px;
-    }
-    
-    .visible{
-      display: block;
-    }
-  </style>
+
+
   <section id="courses" class="section-padding">
     <div class="container">
       <div class="row">
@@ -88,7 +76,7 @@ if(!$_SESSION['user']){
     </div>
     <div style="display:flex;justify-content:center;align-items:center;">
       <div style="width:600px;">
-        <form action="paginaPrincipal.php" method="POST"class="mc-trial row">
+        <form action="paginaPrincipalMaestro.php" method="POST"class="mc-trial row">
               <div class="form-group col-md-6 col-sm-4">
                 <div class=" controls">
                 <input type="text" name="curso" id="buscar" value="<?php echo isset($_POST['curso']) ? $_POST['curso'] : ''; ?>">
@@ -110,94 +98,86 @@ if(!$_SESSION['user']){
           <th>#</th>
           <th>CURSO</th>
           <th>AREA</th>
-          <th>Maestro</th>
-          <th>Informacion extra</th>
-          <th></th> 
+          <th></th>
         </tr>
-
         <?php foreach ($resultado as $fila): ?>
           <tr>
             <td><?php echo $cont; $cont++; ?></td>
             <td><?php echo $fila['nombre'] ?></td>
             <td><?php echo $fila['area'] ?></td>
-            <td><?php echo $fila['maestro'] ?></td>
             <td>
-              <button data-target="#showInfo" data-toggle="modal" id="<?php echo "curso.".$fila['area'].".".$fila['nombre'] ?>"  type="submit" 
-                  class="btn btn-block btn-submit" style="width: 140px; font-size: 10px; background:darkslateblue; border-radius:10px;"
-                    onclick=" getDays('<?php echo $fila['lunes'] ?>','<?php echo $fila['martes'] ?>'
-                    ,'<?php echo $fila['miercoles'] ?>','<?php echo $fila['jueves'] ?>','<?php echo $fila['viernes'] ?>'
-                    ,'<?php echo $fila['sabado'] ?>','<?php echo $fila['domingo'] ?>','<?php echo $fila['duracion'] ?>');"
+              <button data-target="#login" data-toggle="modal" id="<?php echo "curso.".$fila['area'].".".$fila['nombre'] ?>"  type="submit" 
+                  class="btn btn-block btn-submit" style="width: 100px; font-size: 10px;"
+                    onclick="applyDatas(this);"
                   >
-                  Mostrar info.
+                  Asginar clase
               </button>
             </td>
-            
-            <td>
-              <form action="#" method="post">
-              <input type="text" name="codigo" value="<?php echo $fila['codigo'] ?> " id="" hidden>  
-              <button data-target="#registrar" data-toggle="modal"   type="submit" 
-                  class="btn btn-block btn-submit" style="width: 140px; font-size: 10px;"
-                  >
-                  Registrarse en clase
-              </button>
-              </form>
-            </td>
-
           </tr>
         <?php endforeach; ?>
       </table>
       </div>
   </section>
-  <div class="modal fade" id="showInfo" role="dialog">
+  <div class="modal fade" id="login" role="dialog">
     <div class="modal-dialog modal-sm">
 
       <!-- Modal content no 1-->
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title text-center form-title">Crear clase</h4>
         </div>
         <div class="modal-body padtrbl">
          <div class="login-box-body">
+            <p class="login-box-msg">Registrar horario</p>
             <div class="form-group">
-              <h3>Horario:</h3>
-              <div class="container-days">
-                  <div class="l">
-                  <h3>Lunes</h3>
-                  <input type="radio" name="" disabled id="l">
-                  </div>
-                  <div class="m">
-                  <h3>Martes</h3>
-                  <input type="radio" name="" disabled id="m">
-                  </div>
-                  <div class="mm">
-                  <h3>Miercoles</h3>
-                  <input type="radio" name="" disabled id="mm">
-                  </div>
-                  <div class="j">
-                  <h3>Jueves</h3>
-                  <input type="radio" name="" disabled id="j">
-                  </div>
-                  <div class="v">
-                  <h3>Viernes</h3>
-                  <input type="radio" name="" disabled id="v">
-                  </div>
-                  <div class="s">
-                  <h3>Sabado</h3>
-                  <input type="radio" name="" disabled id="s">
-                  </div>
-                  <div class="d">
-                  <h3>Domingo</h3>
-                  <input type="radio" name="" disabled id="d">
-                  </div>
-                  <p id="timeClass"></p>
-              </div>
+              <form action="registrarHorario.php" method="post" >
+              <input type="text" hidden name="curso" id="dataCourse" >
+              <input type="text" hidden name="area" id="dataArea"  >
+                <div class="form-group has-feedback">
+                  <input class="form-control" placeholder="Costo" name="costo" type="text" autocomplete="on" required/>
+                </div>
+                <div class="form-group has-feedback">
+                  <input class="form-control" placeholder="año" name="year" type="number" autocomplete="on" required />
+                </div>
+                <div class="form-group has-feedback">
+                  <label for="exampleInputPassword1">Fecha Inicio</label>
+                  <input class="form-control"  name="fechaInicio" type="date" autocomplete="on" required />
+                </div>
+                <div class="form-group has-feedback">
+                  <label for="exampleInputPassword1">Fecha Fin</label>
+                  <input class="form-control"  name="fechaFin" placeholder="fecha fin" type="date" autocomplete="on" required />
+                </div>
+                <div class="form-group has-feedback">
+                  <input class="form-control" placeholder="Duracion de clase" name="duracion" type="number" autocomplete="on" required />
+                </div>
+                  <h3>Seleccione los dias de clase</h3>
+                  <label for="exampleInputPassword1">Lunes</label>
+                  <input  name="L" placeholder="fecha fin" type="checkbox" autocomplete="on"  value="1" />
+                  <label for="exampleInputPassword1">Martes</label>
+                  <input  name="M" placeholder="fecha fin" type="checkbox" autocomplete="on" value="1" />
+                  <label for="exampleInputPassword1">Miercoles</label>
+                  <input   name="MM" placeholder="fecha fin" type="checkbox" autocomplete="on" value="1"/>
+                  <label for="exampleInputPassword1">Jueves</label>
+                  <input   name="J" placeholder="fecha fin" type="checkbox" autocomplete="on" value="1"/>
+                  <label for="exampleInputPassword1">Viernes</label>
+                  <input   name="V" placeholder="fecha fin" type="checkbox" autocomplete="on" value="1" />
+                  <label for="exampleInputPassword1">Sabado</label>
+                  <input   name="S" placeholder="fecha fin" type="checkbox" autocomplete="on" value="1"/>
+                  <label for="exampleInputPassword1">Domingo</label>
+                  <input   name="D" placeholder="fecha fin" type="checkbox" autocomplete="on" value="1"/>
+                <div class="row">
+                <div class="col-xs-12">
+                    <button type="submit" class="btn btn-green btn-block btn-flat">Aceptar</button>
+                </div>
+                </div>
+              </form>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
   <footer id="footer" class="footer">
     <div class="container text-center">
       <ul class="social-links">
@@ -213,39 +193,18 @@ if(!$_SESSION['user']){
   </footer>
   <!--/ Footer-->
   <script>
-    function getDays(lunes,martes,miercoles,jueves,viernes,sabado,domingo,time){
-      verifyDay(lunes,"l");
-      verifyDay(martes,"m");
-      verifyDay(miercoles,"mm");
-      verifyDay(jueves,"j");
-      verifyDay(viernes,"v");
-      verifyDay(viernes,"s");
-      verifyDay(viernes,"d");
-      var el=document.getElementById("timeClass").innerHTML="Duracion de cada clase (en hora): "+(time?time:"0");
-      
+    function applyDatas(element){
+     var identificador=element.id.toString();
+     var numId=identificador.split(".");
+     var area=numId[1];
+     var curso=numId[2];
+     var e1=document.getElementById("dataCourse");
+     var e2=document.getElementById("dataArea");
+     e1.setAttribute('value',curso);
+     e2.setAttribute('value',area);
     }
-
-    function verifyDay(element,name){
-      var el=document.getElementsByClassName(name);
-      if(element=='1'){
-        el[0].classList.add('visible');
-        setCheck(name);
-      }else{
-         try{
-          el[0].classList.remove("visible");
-         }catch(err){}
-      }
-      console.log(el);
-    }
-    function setCheck(element){
-      var elemn=document.getElementById(element).checked=true;
-    }
-
-    
-
-    
-
   </script>
+
   <script src="js/jquery.min.js"></script>
   <script src="js/jquery.easing.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
