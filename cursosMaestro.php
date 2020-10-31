@@ -64,7 +64,7 @@ if(!$_SESSION['user']){
         <ul class="nav navbar-nav navbar-right">
           <li><a href="paginaPrincipalMaestro.php" >Inicio</a></li>
         </ul>
-        
+
       </div>
     </div>
   </nav>
@@ -91,7 +91,7 @@ if(!$_SESSION['user']){
                   <br>
                   <input class="form-control" placeholder="año del curso"  name="year" type="number" value="<?php echo isset($_POST['year']) ? $_POST['year'] : ''; ?>" autocomplete="on" required />
                 </div>
-                
+
               </div>
               <!-- End email input -->
               <div class="col-md-6 col-sm-4">

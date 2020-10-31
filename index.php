@@ -14,7 +14,7 @@ header("location: paginaPrincipal.php");
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Creatica Unlimited</title>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans|Candal|Alegreya+Sans">
-  <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+<script src="https://kit.fontawesome.com/e51fb510f5.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/imagehover.min.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -53,7 +53,8 @@ header("location: paginaPrincipal.php");
           <h4 class="modal-title text-center form-title">Ingresar Sesion</h4>
         </div>
         <div class="modal-body padtrbl">
-         <div class="login-box-body">
+
+          <div class="login-box-body">
             <p class="login-box-msg">Inicia tu sesion</p>
             <div class="form-group">
               <form action="inicioSesion.php" method="post" >
@@ -74,6 +75,7 @@ header("location: paginaPrincipal.php");
           </div>
         </div>
       </div>
+
     </div>
   </div>
 

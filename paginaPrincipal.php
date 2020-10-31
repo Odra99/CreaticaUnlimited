@@ -4,7 +4,7 @@ if(!$_SESSION['user']){
   header("location: index.php");
 }else{
   define('USER', 'root');
-  define('PASSWORD', 'Jhon$19PVT');
+  define('PASSWORD', 'Inegap11');
   define('HOST', 'localhost');
   define('DATABASE', 'CreaticaUnlimited');
   try {
@@ -17,8 +17,8 @@ if(!$_SESSION['user']){
   $sql.=" FROM CURSO c INNER JOIN HORARIO h ON c.area=h.area ";
   $sql.="AND h.curso=c.nombre INNER JOIN HORARIOSEMANA hs ON hs.codigo=h.codigo  ";
   $sql.="INNER JOIN PERFIL p ON h.usuarioMaestro=p.usuario  WHERE h.año=(SELECT YEAR(NOW())) ";
-  
-  
+
+
   if(isset($_POST['buscar']))
       {
         $sql.=" AND c.nombre LIKE '%".$_POST['curso']."%'";
@@ -37,11 +37,12 @@ if(!$_SESSION['user']){
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Creatica Unlimited</title>
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans|Candal|Alegreya+Sans">
-  <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+
+
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/imagehover.min.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
+<script src="https://kit.fontawesome.com/e51fb510f5.js" crossorigin="anonymous"></script>
 
 </head>
 
@@ -59,7 +60,10 @@ if(!$_SESSION['user']){
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="cerrarSesion.php" >Cerrar sesion</a></li>
+          <li><a href="Administrador.php">Aux</a></li>
+          <li><a href="perfil.php" >Perfil </a></li>
+          <li><a href="cerrarSesion.php" >Cerrar sesion   </a></li>
+
         </ul>
       </div>
     </div>
@@ -71,7 +75,7 @@ if(!$_SESSION['user']){
     .l h3,.m h3,.mm h3,.j h3,.v h3,.s h3,.d  h3 {
       font-size: 15px;
     }
-    
+
     .visible{
       display: block;
     }
@@ -112,7 +116,7 @@ if(!$_SESSION['user']){
           <th>AREA</th>
           <th>Maestro</th>
           <th>Informacion extra</th>
-          <th></th> 
+          <th></th>
         </tr>
 
         <?php foreach ($resultado as $fila): ?>
@@ -122,7 +126,7 @@ if(!$_SESSION['user']){
             <td><?php echo $fila['area'] ?></td>
             <td><?php echo $fila['maestro'] ?></td>
             <td>
-              <button data-target="#showInfo" data-toggle="modal" id="<?php echo "curso.".$fila['area'].".".$fila['nombre'] ?>"  type="submit" 
+              <button data-target="#showInfo" data-toggle="modal" id="<?php echo "curso.".$fila['area'].".".$fila['nombre'] ?>"  type="submit"
                   class="btn btn-block btn-submit" style="width: 140px; font-size: 10px; background:darkslateblue; border-radius:10px;"
                     onclick=" getDays('<?php echo $fila['lunes'] ?>','<?php echo $fila['martes'] ?>'
                     ,'<?php echo $fila['miercoles'] ?>','<?php echo $fila['jueves'] ?>','<?php echo $fila['viernes'] ?>'
@@ -131,11 +135,11 @@ if(!$_SESSION['user']){
                   Mostrar info.
               </button>
             </td>
-            
+
             <td>
               <form action="#" method="post">
-              <input type="text" name="codigo" value="<?php echo $fila['codigo'] ?> " id="" hidden>  
-              <button data-target="#registrar" data-toggle="modal"   type="submit" 
+              <input type="text" name="codigo" value="<?php echo $fila['codigo'] ?> " id="" hidden>
+              <button data-target="#registrar" data-toggle="modal"   type="submit"
                   class="btn btn-block btn-submit" style="width: 140px; font-size: 10px;"
                   >
                   Registrarse en clase
@@ -197,7 +201,7 @@ if(!$_SESSION['user']){
       </div>
     </div>
   </div>
-  
+
   <footer id="footer" class="footer">
     <div class="container text-center">
       <ul class="social-links">
@@ -222,7 +226,7 @@ if(!$_SESSION['user']){
       verifyDay(viernes,"s");
       verifyDay(viernes,"d");
       var el=document.getElementById("timeClass").innerHTML="Duracion de cada clase (en hora): "+(time?time:"0");
-      
+
     }
 
     function verifyDay(element,name){
@@ -241,9 +245,9 @@ if(!$_SESSION['user']){
       var elemn=document.getElementById(element).checked=true;
     }
 
-    
 
-    
+
+
 
   </script>
   <script src="js/jquery.min.js"></script>

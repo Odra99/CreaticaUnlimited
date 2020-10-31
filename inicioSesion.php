@@ -21,7 +21,7 @@ define('DATABASE', 'CreaticaUnlimited');
 try {
     $connection = new PDO("mysql:host=".HOST.";dbname=".DATABASE, USER, PASSWORD);
     //$conexion = new mysqli("root","Jhon$19PVT","localhost","CreaticaUnlimited");
-    
+
 } catch (PDOException $e) {
     exit("Error: " . $e->getMessage());
 }

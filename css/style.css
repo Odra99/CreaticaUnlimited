@@ -13,7 +13,11 @@ body {
 	font-family: 'Open Sans', sans-serif;
     font-weight: 400;
 		 margin-bottom: 40px;
+<<<<<<< HEAD
 		 
+=======
+
+>>>>>>> main
 }
 
 ol, ul {
@@ -566,8 +570,11 @@ Footer
     color: #fff;
 }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> main
 .footer h3{
 	font-weight: 300;
 	letter-spacing: 0.05em;
@@ -787,3 +794,111 @@ Responsive media queries
         text-align: center;
     }
 }
+<<<<<<< HEAD
+=======
+.sidebar-navigation {
+  width: 20.5%;
+  float: left;
+  height: 100%;
+
+  position: fixed;
+  background-color: rgba(111,216,131,0.6);
+  z-index: 10;
+}
+
+.sidebar-navigation nav {
+  position: relative;
+  top: 40%;
+  left: 60%;
+	
+	margin-left: 10%;
+  transform: translateX(-60%) translateY(-60%);
+}
+
+.sidebar-navigation ul {
+  margin-left: 50px;
+  list-style: none;
+  padding: 0;
+}
+.sidebar-navigation li{
+  padding: 10px 0;
+}
+.sidebar-navigation span{
+  display: inline-block;
+  position:relative;
+}
+.sidebar-navigation nav a{
+  display: inline-block;
+  color: gray;
+  margin-top: 5px;
+  text-decoration: none!important;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  text-transform: capitalize;
+}
+.circle{
+  margin-right: 5px;
+  height: 10px;
+  width: 10px;
+  left: 0px;
+  top: -1px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 2px solid #fff;
+  transition: all 0.3s;
+}
+.rect{
+  height: 1px;
+  width: 0px;
+  left: 0;
+  bottom: 5.5px;
+  background-color: #fff;
+  -webkit-transition: -webkit-transform 0.1s, width 0.6s;
+  -moz-transition: -webkit-transform 0.1s, width 0.6s;
+  transition: transform 0.1s, width 0.6s;
+}
+.sidebar-navigation nav a:focus {
+  color: #fff;
+}
+.sidebar-navigation nav a:hover, nav .active-section {
+  color: #fff;
+}
+.sidebar-navigation nav a:hover span, nav .active-section span{
+  background-color: #ddd;
+}
+.sidebar-navigation nav .active-section .rect{
+  width: 30px;
+}
+.sidebar-navigation nav .active-section .circle{
+  background-color: #fff;
+}
+
+.sidebar-navigation .social-icons {
+  position: absolute;
+  width: 100%;
+  bottom: 10px;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.sidebar-navigation .social-icons li {
+  display: inline-block;
+  margin-right: 15px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.sidebar-navigation .social-icons li:last-child {
+  margin-right: 0px;
+}
+
+.sidebar-navigation .social-icons li a {
+  font-size: 18px;
+  color: #fff;
+  transition: all 0.5s;
+}
+
+.sidebar-navigation .social-icons li a:hover {
+  color: #45489a;
+}
+>>>>>>> main

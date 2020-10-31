@@ -61,7 +61,7 @@
           <label for="exampleInputEmail1">Rol</label>
           <select name="rol" required id="">
             <option value="1">Estudiante</option>
-            <option value="2">Maestro</option>       
+            <option value="2">Maestro</option>
           </select>
         </div>
         <button type="submit" class="btn btn-primary">Crear usuario</button>
