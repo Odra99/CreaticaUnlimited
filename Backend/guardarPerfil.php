@@ -2,10 +2,14 @@
 session_start();
 if(!$_SESSION['user']){
 <<<<<<< HEAD
+  header("location: ../index.php");
+=======
+<<<<<<< HEAD
   header("location: index.php");
 =======
   header("location: ../index.php");
 >>>>>>> Jhony
+>>>>>>> main
 }else{
 
   define('USER', 'root');
