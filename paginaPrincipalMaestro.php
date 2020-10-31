@@ -58,7 +58,7 @@ if(!$_SESSION['user']){
         <ul class="nav navbar-nav navbar-right">
           <li><a href="cursosMaestro.php" >Ver clases</a></li>
         </ul>
-        
+
       </div>
     </div>
   </nav>
@@ -106,11 +106,11 @@ if(!$_SESSION['user']){
             <td><?php echo $fila['nombre'] ?></td>
             <td><?php echo $fila['area'] ?></td>
             <td>
-              <button data-target="#login" data-toggle="modal" id="<?php echo "curso.".$fila['area'].".".$fila['nombre'] ?>"  type="submit" 
+              <button data-target="#login" data-toggle="modal" id="<?php echo "curso.".$fila['area'].".".$fila['nombre'] ?>"  type="submit"
                   class="btn btn-block btn-submit" style="width: 100px; font-size: 10px;"
                     onclick="applyDatas(this);"
                   >
-                  Asginar clase
+                  Asignar clase
               </button>
             </td>
           </tr>
