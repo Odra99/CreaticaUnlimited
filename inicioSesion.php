@@ -1,25 +1,64 @@
+
 <?php
 session_start(); // Iniciando sesion
 $error=''; // Variable para almacenar el mensaje de error
-$url="index.php";
+$url='index.php';  //url de redireccion
 if (!(isset($_POST['usuario']) || isset($_POST['password']))) {
 $error = "Usuario o contraseña es invalido";
 }
+
 else
 {
+// Define $username y $password
 $username=$_POST['usuario'];
 $password=$_POST['password'];
-    $connection = new  mysqli("localhost","root","Inegap11","CreaticaUnlimited");
-$sql ="SELECT * FROM PERFIL WHERE usuario = '" . $username . "' AND password='".$password."'LIMIT 1";
-$count = 0;
-$resultado = $connection->query($sql);
- foreach($resultado as $fila) $count++;
-  if ($count==1){
-        $url = "paginaPrincipal.php";
-        $_SESSION['user']=$username;
-      } else {
-$error = "El Usuario o la contraseña es inválida.";
-  }
+//$conexion = new mysqli("servidor","usuario","clave","bd")
+define('USER', 'root');
+define('PASSWORD', 'Jhon$19PVT');
+define('HOST', 'localhost');
+define('DATABASE', 'CreaticaUnlimited');
+
+try {
+    $connection = new PDO("mysql:host=".HOST.";dbname=".DATABASE, USER, PASSWORD);
+    //$conexion = new mysqli("root","Jhon$19PVT","localhost","CreaticaUnlimited");
+
+} catch (PDOException $e) {
+    exit("Error: " . $e->getMessage());
 }
-  header("location:".$url);
+$sql ="SELECT usuario, contraseña FROM PERFIL WHERE usuario = '" . $username . "' AND contraseña='".$password."';";
+$resultado = $connection->query($sql);
+$valid=false;
+$rol=-1;
+foreach ($resultado as $row){
+    $valid=true;
+    $sql = "SELECT * FROM MAESTRO WHERE usuario = '" . $username ."'";
+    $resultado=$connection->query($sql);
+    $active=0;
+    foreach ($resultado as $fila){
+        $rol=0;
+        $valid=false;
+        $url = "paginaPrincipalMaestro.php";
+        $active=$fila['estado'];
+    }
+    if($valid){
+        $rol=1;
+        $url = "paginaPrincipal.php";
+    }
+    $valid=true;
+    if($rol==0 && $active==0){
+        $valid=false;
+        $url="index.php";
+    }
+}
+
+if ($valid){
+        $_SESSION['user']=$username; // Iniciando la sesion
+        $_SESSION['rol']=$rol;
+} else {
+$error = "El Usuario o la contraseña es inválida.";
+
+}
+}
+
+header("location: ".$url);
 ?>

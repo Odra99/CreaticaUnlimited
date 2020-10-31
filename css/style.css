@@ -13,7 +13,11 @@ body {
 	font-family: 'Open Sans', sans-serif;
     font-weight: 400;
 		 margin-bottom: 40px;
+<<<<<<< HEAD
+		 
+=======
 
+>>>>>>> main
 }
 
 ol, ul {
@@ -566,6 +570,11 @@ Footer
     color: #fff;
 }
 
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> main
 .footer h3{
 	font-weight: 300;
 	letter-spacing: 0.05em;
@@ -785,6 +794,8 @@ Responsive media queries
         text-align: center;
     }
 }
+<<<<<<< HEAD
+=======
 .sidebar-navigation {
   width: 20.5%;
   float: left;
@@ -890,3 +901,4 @@ Responsive media queries
 .sidebar-navigation .social-icons li a:hover {
   color: #45489a;
 }
+>>>>>>> main
