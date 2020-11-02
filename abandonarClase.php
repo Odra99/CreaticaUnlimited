@@ -112,20 +112,7 @@ if(!$_SESSION['user']){
       </div>
   </section>
 
-  <footer id="footer" class="footer">
-    <div class="container text-center">
-      <ul class="social-links">
-        <li><a href="#link"><i class="fa fa-twitter fa-fw"></i></a></li>
-        <li><a href="#link"><i class="fa fa-facebook fa-fw"></i></a></li>
-        <li><a href="#link"><i class="fa fa-google-plus fa-fw"></i></a></li>
-      </ul>
-      @2020 CREATICA Unlimited
-      <div class="credits">
 
-      </div>
-    </div>
-  </footer>
-  <!--/ Footer-->
 
 
   <script src="js/jquery.min.js"></script>

@@ -33,7 +33,7 @@ if(!$_SESSION['user']){
        <form action="Backend/guardarHorario.php" method="POST" role="form" class="contactForm col-md-12">
          <div class="col-md-5 col-sm-5 col-xs-12 left" style="padding-left: 20%;">
           <p><label>Curso:</label><br><input  required type='text' name='nombre' value='' class='auto'></p>
-        <input type="text" hidden name="year" value="<?php echo $year ?>"/>
+      
            <div class="form-group">
              <label><i class="far fa-calendar-alt"></i> Fecha Inicio</label></br>
             <input type="date" name="fechaInicio"  required/>
