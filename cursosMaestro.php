@@ -16,21 +16,24 @@ if(!$_SESSION['user']){
   $year=$_POST['year'];
   $sql='';
   if($year==null){
-    $sql =" SELECT * FROM HORARIO WHERE usuarioMaestro='".$_SESSION['user']."' AND ciclo=(select YEAR(NOW()))";
+    $sql ="SELECT * FROM HORARIO WHERE usuarioMaestro='".$_SESSION['user']."' AND año=(select YEAR(NOW()))";
   }else{
-    $sql =" SELECT * FROM HORARIO WHERE usuarioMaestro='".$_SESSION['user']."' AND ciclo='".$year."'";
+    $sql ="SELECT * FROM HORARIO WHERE usuarioMaestro='".$_SESSION['user']."' AND año='".$year."'";
   }
   if(isset($_POST['buscar']))
-       {
-         $sql.="AND curso LIKE '%".$_POST['curso']."%'";
-       }
-   $sql.="ORDER BY año ASC;";
-   $resultado = $connection->query($sql);
-   $cont =1;
+      {
+        $sql.="AND curso LIKE '%".$_POST['curso']."%'";
+      }
+  $sql.="ORDER BY año ASC;";
+  $resultado = $connection->query($sql);
+  $cont =1;
+
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -40,28 +43,13 @@ if(!$_SESSION['user']){
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/imagehover.min.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
+
 </head>
+
 <body>
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">CREATICA <span>Unlimited</span></a>
-      </div>
-      <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="cerrarSesion.php" >Cerrar sesion</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="paginaPrincipalMaestro.php" >Inicio</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <?php include("navMaestro.html") ?>
+
+
   <section id="courses" class="section-padding">
     <div class="container">
       <div class="row">
@@ -74,7 +62,7 @@ if(!$_SESSION['user']){
     </div>
     <div style="display:flex;justify-content:center;align-items:center;">
       <div style="width:600px;">
-        <form action="cursosMaestro.php" method="POST"class="mc-trial row">
+        <form action="#" method="POST"class="mc-trial row">
               <div class="form-group col-md-6 col-sm-4">
                 <div class=" controls">
                 <input type="text" name="curso" id="buscar" value="<?php echo isset($_POST['curso']) ? $_POST['curso'] : ''; ?>">
@@ -83,7 +71,9 @@ if(!$_SESSION['user']){
                   <br>
                   <input class="form-control" placeholder="año del curso"  name="year" type="number" value="<?php echo isset($_POST['year']) ? $_POST['year'] : ''; ?>" autocomplete="on" required />
                 </div>
+
               </div>
+              <!-- End email input -->
               <div class="col-md-6 col-sm-4">
                 <p>
                   <button name="buscar" type="submit" class="btn btn-block btn-submit">
@@ -99,6 +89,7 @@ if(!$_SESSION['user']){
           <th>#</th>
           <th>CURSO</th>
           <th>AREA</th>
+
         </tr>
         <?php foreach ($resultado as $fila): ?>
           <tr>
@@ -111,18 +102,7 @@ if(!$_SESSION['user']){
       </div>
   </section>
 
-  <footer id="footer" class="footer">
-    <div class="container text-center">
-      <ul class="social-links">
-        <li><a href="#link"><i class="fa fa-twitter fa-fw"></i></a></li>
-        <li><a href="#link"><i class="fa fa-facebook fa-fw"></i></a></li>
-        <li><a href="#link"><i class="fa fa-google-plus fa-fw"></i></a></li>
-      </ul>
-      @2020 CREATICA Unlimited
-      <div class="credits">
-      </div>
-    </div>
-  </footer>
+
   <script>
     function applyDatas(element){
      var identificador=element.id.toString();
@@ -135,10 +115,13 @@ if(!$_SESSION['user']){
      e2.setAttribute('value',area);
     }
   </script>
+
   <script src="js/jquery.min.js"></script>
   <script src="js/jquery.easing.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/custom.js"></script>
   <script src="contactform/contactform.js"></script>
+
 </body>
+
 </html>

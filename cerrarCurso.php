@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 $codigo=$_POST['codigo'];
 $user=$_SESSION['user'];
@@ -8,7 +8,8 @@ if($user==null){
 $sql="UPDATE INSCRITO SET estado=0 WHERE codigoCurso=".$codigo." ;";
 
 define('USER', 'root');
-define('PASSWORD', 'Jhon$19PVT');
+$passwordAcceso = include 'ControlAcceso.php';
+define('PASSWORD', $passwordAcceso);
 define('HOST', 'localhost');
 define('DATABASE', 'CreaticaUnlimited');
 try {

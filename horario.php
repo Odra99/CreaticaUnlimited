@@ -42,9 +42,12 @@ if(!$_SESSION['user']){
            <label><i class="far fa-calendar-alt"></i> Fecha Fin</label></br>
           <input type="date" name="fechaFin"  required />
          </div>
+         <div class="form-group has-feedback">
+           <input class="form-control" placeholder="año" name="year" type="number" maxlength="4" autocomplete="on" required />
+         </div>
          <div class="form-group" style="width: 75%;" >
              <label>Costo Q. </label></br>
-           <input type="number" step="0.01" name="costo" min="0" class="form-control form" value="<?php echo isset($_GET['costo']) ? $_GET['costo'] : ''; ?>"   required oninvalid="setCustomValidity('Por favor defina el costo del curso')"
+           <input type="number" step="0.01" name="costo" min="0" class="form-control form" required oninvalid="setCustomValidity('Por favor defina el costo del curso')"
                   oninput="setCustomValidity('')" />
          </div>
          </div>

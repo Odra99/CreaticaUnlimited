@@ -13,7 +13,7 @@ if (isset($_GET['term'])){
         $conn = new PDO("mysql:host=".DB_SERVER.";port=8889;dbname=".DB_NAME, DB_USER, DB_PASSWORD);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $stmt = $conn->prepare("SELECT usuario FROM MAESTRO WHERE usuario LIKE :term AND estado='PRESENTE'");
+        $stmt = $conn->prepare("SELECT usuario FROM MAESTRO WHERE usuario LIKE :term AND estado='1'");
         $stmt->execute(array('term' => '%'.$_GET['term'].'%'));
 
         while($row = $stmt->fetch()) {

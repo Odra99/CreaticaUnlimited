@@ -21,9 +21,7 @@ if(!$_SESSION['user']){
   $sql.="ORDER BY nombre;";
   $resultado = $connection->query($sql);
   $cont =1;
-  $Year = date("Y");
-  $fechaInicio = date("Y-m-d");
-  $fechaFin = $Year."-12-31";
+
 }
 ?>
 
@@ -43,30 +41,7 @@ if(!$_SESSION['user']){
 </head>
 
 <body>
-  <!--Navigation bar-->
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">CREATICA <span>Unlimited</span></a>
-      </div>
-      <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="cerrarSesion.php" >Cerrar sesion</a></li>
-
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="cursosMaestro.php" >Ver clases</a></li>
-          <li><a href="perfil.php" >Perfil </a></li>
-        </ul>
-
-      </div>
-    </div>
-  </nav>
+<?php include("navMaestro.html"); ?>
 
 
   <section id="courses" class="section-padding">
@@ -87,7 +62,7 @@ if(!$_SESSION['user']){
                 <input type="text" name="curso" id="buscar" value="<?php echo isset($_POST['curso']) ? $_POST['curso'] : ''; ?>">
                 </div>
               </div>
-
+              <!-- End email input -->
               <div class="col-md-6 col-sm-4">
                 <p>
                   <button name="buscar" type="submit" class="btn btn-block btn-submit">
@@ -113,9 +88,8 @@ if(!$_SESSION['user']){
             <td>
               <button data-target="#login" data-toggle="modal" id="<?php echo "curso.".$fila['area'].".".$fila['nombre'] ?>"  type="submit"
                   class="btn btn-block btn-submit" style="width: 100px; font-size: 10px;"
-                    onclick="applyDatas(this);"
-                  >
-                  Asignar clase
+                    onclick="applyDatas(this);">
+              Asignar clase
               </button>
             </td>
           </tr>
@@ -125,6 +99,8 @@ if(!$_SESSION['user']){
   </section>
   <div class="modal fade" id="login" role="dialog">
     <div class="modal-dialog modal-sm">
+
+      <!-- Modal content no 1-->
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -137,38 +113,42 @@ if(!$_SESSION['user']){
               <form action="registrarHorario.php" method="post" >
               <input type="text" hidden name="curso" id="dataCourse" >
               <input type="text" hidden name="area" id="dataArea"  >
+              <div class="form-group" style="width: 75%;" >
+                  <label>Costo Q. </label></br>
+                <input type="number" step="0.01" name="costo" min="0" class="form-control form" required oninvalid="setCustomValidity('Por favor defina el costo del curso')"
+                       oninput="setCustomValidity('')" />
+              </div>
                 <div class="form-group has-feedback">
-                  <input class="form-control" placeholder="Costo" name="costo" type="text" autocomplete="on" required/>
+                  <input class="form-control" placeholder="año" name="year" type="number" maxlength="4" autocomplete="on" required />
                 </div>
-                <div class="form-group has-feedback">
-                  <input class="form-control" placeholder="año" name="year" type="number" autocomplete="on" required />
+                <div class="form-group">
+                  <label><i class="far fa-calendar-alt"></i> Fecha Inicio</label></br>
+                 <input type="date" name="fechaInicio"  required/>
                 </div>
-                <div class="form-group has-feedback">
-                  <label for="exampleInputPassword1">Fecha Inicio</label>
-                  <input class="form-control"  name="fechaInicio" type="date" autocomplete="on" required />
-                </div>
-                <div class="form-group has-feedback">
-                  <label for="exampleInputPassword1">Fecha Fin</label>
-                  <input class="form-control"  name="fechaFin" placeholder="fecha fin" type="date" autocomplete="on" required />
-                </div>
+                <div class="form-group">
+                <label><i class="far fa-calendar-alt"></i> Fecha Fin</label></br>
+               <input type="date" name="fechaFin"  required />
+              </div>
                 <div class="form-group has-feedback">
                   <input class="form-control" placeholder="Duracion de clase" name="duracion" type="number" autocomplete="on" required />
                 </div>
-                <label>Seleccione los dias de clase: </label></br>
-               <label for="exampleInputPassword1">Lunes</label>
-               <input  name="L"   type="checkbox"    value="1" />
-               <label for="exampleInputPassword1">Martes</label>
-               <input  name="M"   type="checkbox"   value="1" />
-               <label for="exampleInputPassword1">Miercoles</label>
-               <input   name="MM"   type="checkbox"   value="1"/>
-               <label for="exampleInputPassword1">Jueves</label>
-               <input   name="J"   type="checkbox"   value="1"/>
-               <label for="exampleInputPassword1">Viernes</label>
-               <input   name="V"   type="checkbox"   value="1" />
-               <label for="exampleInputPassword1">Sabado</label>
-               <input   name="S"   type="checkbox"   value="1"/>
-               <label for="exampleInputPassword1">Domingo</label>
-               <input   name="D"   type="checkbox"   value="1"/>  <div class="row">
+                  <label>Seleccione los dias de clase</label><br>
+
+                  <label for="exampleInputPassword1">Lunes</label>
+                  <input  name="L" placeholder="fecha fin" type="checkbox" autocomplete="on"  value="1" />
+                  <label for="exampleInputPassword1">Martes</label>
+                  <input  name="M" placeholder="fecha fin" type="checkbox" autocomplete="on" value="1" />
+                  <label for="exampleInputPassword1">Miercoles</label>
+                  <input   name="MM" placeholder="fecha fin" type="checkbox" autocomplete="on" value="1"/>
+                  <label for="exampleInputPassword1">Jueves</label>
+                  <input   name="J" placeholder="fecha fin" type="checkbox" autocomplete="on" value="1"/>
+                  <label for="exampleInputPassword1">Viernes</label>
+                  <input   name="V" placeholder="fecha fin" type="checkbox" autocomplete="on" value="1" />
+                  <label for="exampleInputPassword1">Sabado</label>
+                  <input   name="S" placeholder="fecha fin" type="checkbox" autocomplete="on" value="1"/>
+                  <label for="exampleInputPassword1">Domingo</label>
+                  <input   name="D" placeholder="fecha fin" type="checkbox" autocomplete="on" value="1"/>
+                <div class="row">
                 <div class="col-xs-12">
                     <button type="submit" class="btn btn-green btn-block btn-flat">Aceptar</button>
                 </div>
@@ -180,6 +160,8 @@ if(!$_SESSION['user']){
       </div>
     </div>
   </div>
+
+  <!--/ Footer-->
   <script>
     function applyDatas(element){
      var identificador=element.id.toString();

@@ -31,7 +31,7 @@ try {
     exit("Error: " . $e->getMessage());
 }
 
-$sql_table="(usuarioMaestro,costo,fechaInicio,fechaFin,año,curso,area,duracion)";
+$sql_table="(usuarioMaestro,costo,fechaInicio,fechaFin,year,curso,area,duracion)";
 $sql_valid="select validarFechas('".$fechaInicio."','".$fechaFin."','".$year."');";
 $resultado=$connection->query($sql_valid)->fetchColumn(0);
 if($resultado[0]==1){
@@ -68,12 +68,13 @@ if($resultado[0]==1){
       $sql="SELECT codigo FROM HORARIO ORDER BY CODIGO DESC LIMIT 1;";
       $resultado=$connection->query($sql);
       foreach($resultado as $row ){
-          $sql="INSERT INTO HORARIOSEMANA VALUES(".$row['codigo'].",".$lunes.",".$martes.",".$miercoles.",".$jueves.",".$viernes.",".$sabado.",".$domingo.")";
+          $sql="INSERT INTO HORARIOSEMANA (codigo, lunes, martes, miercoles, jueves, viernes, sabado, domingo) VALUES('".$row['codigo']."','".$lunes."','".$martes."','".$miercoles."','".$jueves."','".$viernes."','".$sabado."','".$domingo."')";
           $connection->query($sql);
         }
   }
-  header("location: paginaPrincipalMaestro.php");
+
 
 }
+header("location: paginaPrincipalMaestro.php?error=".$resultado[0]);
 
 ?>

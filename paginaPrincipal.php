@@ -48,28 +48,8 @@ if(!$_SESSION['user']){
 </head>
 
 <body>
-  <!--Navigation bar-->
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">CREATICA <span>Unlimited</span></a>
-      </div>
-      <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="Administrador.php">Aux</a></li>
-          <li><a href="perfil.php" >Perfil </a></li>
-          <li><a href="cerrarSesion.php" >Cerrar sesion   </a></li>
-          <li><a href="abandonarClase.php" >Abandonar Clase   </a></li>
+  <?php include("navEstudiante.html"); ?>
 
-        </ul>
-      </div>
-    </div>
-  </nav>
   <style>
     .l ,.m,.mm,.j,.v,.s,.d  {
       display: none;

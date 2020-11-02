@@ -1,7 +1,6 @@
 <?php
 session_start();
 if(!$_SESSION['user']){
-
   header("location: ../index.php");
 }else{
 
@@ -19,7 +18,7 @@ if(!$_SESSION['user']){
   if(isset($_POST['editar'])){
       header("location:  ../editarHorario.php?codigo=".$_POST['codigo']."&nombre=".$_POST['nombre']."&nombreMaestro=".$_POST['nombreMaestro']);
   }else{
-
+    if($_POST['estado']=='EN PROCESO'){
       $sql = "DELETE FROM HORARIO WHERE codigo='".$_POST['codigo']."'";
       if($connection->query($sql)){
         header("location: ../Administrador.php?mensaje=El horario del curso eliminado con exito");
@@ -28,7 +27,9 @@ if(!$_SESSION['user']){
 
       }
 
-
+    }else{
+        header("location:  ../Administrador.php?mensaje=El horario del curso no se pudo eliminar porque ya esta inicializado/completado");
+    }
 
   }
 

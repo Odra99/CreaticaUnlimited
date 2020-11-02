@@ -70,7 +70,7 @@ if(!$_SESSION['user']){
                 <?php endforeach; ?>
               </select>
             </div>
-
+          
           </div>
 
           <div class="col-md-6 col-sm-6 col-xs-12 right">
@@ -78,7 +78,7 @@ if(!$_SESSION['user']){
               <label>Descripcion</label></br>
               <textarea class="form-control" name="descripcion"  rows="8" required oninvalid="setCustomValidity('Por favor ingrese la descripcion')"
                      oninput="setCustomValidity('')" placeholder="Descripcion"><?php echo isset($_GET['descripcion']) ? $_GET['descripcion'] : ''; ?></textarea>
-
+              <div class="validation"></div>
             </div>
           </div>
 

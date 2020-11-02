@@ -8,7 +8,8 @@ if($user==null){
 $sql="INSERT INTO INSCRITO (codigoEstudiante,codigoCurso,estado)";
 $sql.=" VALUES('".$user."' , ".$codigo." , 1);";
 define('USER', 'root');
-define('PASSWORD', 'Jhon$19PVT');
+$passwordAcceso = include 'ControlAcceso.php';
+define('PASSWORD', $passwordAcceso);
 define('HOST', 'localhost');
 define('DATABASE', 'CreaticaUnlimited');
 try {

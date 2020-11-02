@@ -43,24 +43,14 @@ if(!$_SESSION['user']){
 </head>
 
 <body>
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">CREATICA <span>Unlimited</span></a>
-      </div>
-      <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="perfil.php" >Perfil</a></li>
-          <li><a href="cerrarSesion.php" >Cerrar sesion</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+<?php
+  if($maestro=='MAESTRO'){
+     include("navMaestro.html");
+  }else{
+     include("navEstudiante.html"); 
+  }
+
+ ?>
   <div style="margin-top: 250px;">
     <div class="container-fluid mt--7" >
       <div class="row">
@@ -79,17 +69,7 @@ if(!$_SESSION['user']){
               <div class="row">
                 <div class="col">
                   <div class="card-profile-stats d-flex justify-content-center mt-md-5">
-                    <div>
-<<<<<<< HEAD
-                    </div>
-                    <div>
-=======
 
-                    </div>
-                    <div>
-
->>>>>>> main
-                    </div>
                   </div>
                 </div>
               </div>
