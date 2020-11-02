@@ -1,4 +1,4 @@
-<?php 
+<?php
 $error=''; // Variable para almacenar el mensaje de error
 $url = "registrar.php";  //url de redireccion
 if (!(isset($_POST['usuario']) || isset($_POST['clave'])
@@ -15,16 +15,17 @@ if (!(isset($_POST['usuario']) || isset($_POST['clave'])
     $telefono=$_POST['telefono'];
     $email=$_POST['correo'];
     $rol=$_POST['rol'];
-    
+
 $username=$_POST['usuario'];
 $password=$_POST['contraseña'];
 define('USER', 'root');
-define('PASSWORD', 'Jhon$19PVT');
+$passwordAcceso = include 'ControlAcceso.php';
+define('PASSWORD', $passwordAcceso);
 define('HOST', 'localhost');
 define('DATABASE', 'CreaticaUnlimited');
 try {
     $connection = new PDO("mysql:host=".HOST.";dbname=".DATABASE, USER, PASSWORD);
-} catch (PDOException $e) {}   
+} catch (PDOException $e) {}
 $sql ="INSERT INTO PERFIL VALUES('".$nombre."','".$apelido."','".$email."','".$telefono."','".$user."','".$clave."');";
 
 if ($connection->query($sql)){

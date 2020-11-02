@@ -5,7 +5,8 @@ if(!$_SESSION['user']){
 }else{
 
   define('USER', 'root');
-  define('PASSWORD', 'Inegap11');
+  $passwordAcceso = include 'ControlAcceso.php';
+  define('PASSWORD', $passwordAcceso);
   define('HOST', 'localhost');
   define('DATABASE', 'CreaticaUnlimited');
   try {
@@ -13,13 +14,13 @@ if(!$_SESSION['user']){
   } catch (PDOException $e) {
       exit("Error: " . $e->getMessage());
   }
-  $sql ="INSERT INTO CURSO (nombre, area, descripcion,costo) VALUES";
-  $sql.="('".$_POST['nombre']."','".$_POST['area']."','".$_POST['descripcion']."','".$_POST['costo']."')";
+  $sql ="INSERT INTO CURSO (nombre, area, descripcion) VALUES";
+  $sql.="('".$_POST['nombre']."','".$_POST['area']."','".$_POST['descripcion']."')";
 
   if($connection->query($sql)){
     header("location: Administrador.php?mensaje=Curso creado con exito");
   }else{
-    header("location: crearCurso.php?error=El curso no se pudo crear el curso&nombre=".$_POST['nombre']."&area=".$_POST['area']."&descripcion=".$_POST['descripcion']."&costo=".$_POST['costo']);
+    header("location: crearCurso.php?error=El curso no se pudo crear el curso&nombre=".$_POST['nombre']."&area=".$_POST['area']."&descripcion=".$_POST['descripcion']);
   }
 
 }

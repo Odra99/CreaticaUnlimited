@@ -7,7 +7,8 @@ if(!$_SESSION['user']){
   $fechaInicio = date("Y-m-d");
   $fechaFin = $Year."-12-31";
   define('USER', 'root');
-  define('PASSWORD', 'Inegap11');
+  $passwordAcceso = include 'ControlAcceso.php';
+  define('PASSWORD', $passwordAcceso);
   define('HOST', 'localhost');
   define('DATABASE', 'CreaticaUnlimited');
   try {
@@ -78,7 +79,7 @@ if(!$_SESSION['user']){
              </div>
           </div>
           <div class="col-md-12 align-items-center">
-            <input type="text" hidden name="codigo" value="<?php echo $curso['codigoHorario'] ?>"/>
+            <input type="text" hidden name="codigo" value="<?php echo $curso['codigo'] ?>"/>
             <button type="submit" name="modificar" class="btn btn-green col-lg-4" style="margin-left:35%;"><i class="far fa-save"></i> Modificar</button>
           </div>
         </form>

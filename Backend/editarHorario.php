@@ -1,19 +1,13 @@
 <?php
 session_start();
 if(!$_SESSION['user']){
-<<<<<<< HEAD
+
   header("location: ../index.php");
-=======
-<<<<<<< HEAD
-  header("location: index.php");
-=======
-  header("location: ../index.php");
->>>>>>> Jhony
->>>>>>> main
 }else{
 
   define('USER', 'root');
-  define('PASSWORD', 'Inegap11');
+  $passwordAcceso = include 'ControlAcceso.php';
+  define('PASSWORD', $passwordAcceso);
   define('HOST', 'localhost');
   define('DATABASE', 'CreaticaUnlimited');
   try {
@@ -23,10 +17,10 @@ if(!$_SESSION['user']){
   }
 
   if(isset($_POST['editar'])){
-      header("location:  ../editarHorario.php?codigoHorario=".$_POST['codigo']."&nombre=".$_POST['nombre']."&nombreMaestro=".$_POST['nombreMaestro']);
+      header("location:  ../editarHorario.php?codigo=".$_POST['codigo']."&nombre=".$_POST['nombre']."&nombreMaestro=".$_POST['nombreMaestro']);
   }else{
-    if($_POST['estado']=='EN PROCESO'){
-      $sql = "DELETE FROM HORARIO WHERE codigoHorario='".$_POST['codigo']."'";
+
+      $sql = "DELETE FROM HORARIO WHERE codigo='".$_POST['codigo']."'";
       if($connection->query($sql)){
         header("location: ../Administrador.php?mensaje=El horario del curso eliminado con exito");
       }else{
@@ -34,9 +28,7 @@ if(!$_SESSION['user']){
 
       }
 
-    }else{
-        header("location:  ../Administrador.php?mensaje=El horario del curso no se pudo eliminar porque ya esta inicializado/completado");
-    }
+
 
   }
 

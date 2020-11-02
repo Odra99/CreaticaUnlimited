@@ -80,8 +80,15 @@ if(!$_SESSION['user']){
                 <div class="col">
                   <div class="card-profile-stats d-flex justify-content-center mt-md-5">
                     <div>
+<<<<<<< HEAD
                     </div>
                     <div>
+=======
+
+                    </div>
+                    <div>
+
+>>>>>>> main
                     </div>
                   </div>
                 </div>
