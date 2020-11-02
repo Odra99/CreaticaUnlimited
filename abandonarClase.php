@@ -25,6 +25,7 @@ if(!$_SESSION['user']){
   $sql.=";";
   $resultado = $connection->query($sql);
   $cont =1;
+
 }
 ?>
 
@@ -45,27 +46,7 @@ if(!$_SESSION['user']){
 
 <body>
   <!--Navigation bar-->
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">CREATICA <span>Unlimited</span></a>
-      </div>
-      <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="cerrarSesion.php" >Cerrar sesion</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="paginaPrincipalMaestro.php" >Inicio</a></li>
-        </ul>
-
-      </div>
-    </div>
-  </nav>
+  <?php include("navEstudiante.html"); ?>
 
 
   <section id="courses" class="section-padding">
