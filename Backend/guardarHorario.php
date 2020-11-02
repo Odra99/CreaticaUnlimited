@@ -55,14 +55,14 @@ if(!$_SESSION['user']){
 
     }
   }else{
-    $sql = "SELECT codigo FROM CURSO WHERE nombre='".$_POST['nombre']."'";
+    $sql = "SELECT area FROM CURSO WHERE nombre='".$_POST['nombre']."'";
 
     $resultado = $connection->query($sql);
      foreach($resultado as $fila) $curso=$fila;
 
      if(isset($curso)){
-       $sql ="INSERT into HORARIO (usuarioMaestro, fechaInicio, fechaFin, codigo, duracion,year,costo) VALUES";
-       $sql .= "('".$_POST['usuario']."','".$_POST['fechaInicio']."','".$_POST['fechaFin']."','".$curso['codigo']."','".$_POST['clases']."','".$_POST['year']."','".$_POST['costo']."')";
+       $sql ="INSERT into HORARIO (usuarioMaestro, fechaInicio, fechaFin, duracion,area, curso, year,costo) VALUES";
+       $sql .= "('".$_POST['usuario']."','".$_POST['fechaInicio']."','".$_POST['fechaFin']."','".$_POST['clases']."','".$curso['area']."','".$_POST['nombre']."','".$_POST['year']."','".$_POST['costo']."')";
        if($connection->query($sql)){
          $lunes=$_POST['L'];
          $martes=$_POST['M'];
@@ -95,7 +95,8 @@ if(!$_SESSION['user']){
          $sql="SELECT codigo FROM HORARIO ORDER BY CODIGO DESC LIMIT 1;";
          $resultado=$connection->query($sql);
          foreach($resultado as $row ){
-           $sql="INSERT INTO HORARIOSEMANA (codigo, lunes, martes, miercoles, jueves, viernes, sabado, domingo) VALUES('".$row['codigo']."','".$lunes."','".$martes."','".$miercoles."','".$jueves."','".$viernes."','".$sabado."','".$domingo."')";
+           $sql="INSERT INTO HORARIOSEMANA (codigo, lunes, martes, miercoles, jueves, viernes, sabado, domingo) VALUES";
+           $sql.="('".$row['codigo']."','".$lunes."','".$martes."','".$miercoles."','".$jueves."','".$viernes."','".$sabado."','".$domingo."')";
             $connection->query($sql);
            }
          header("location: ../Administrador.php?mensaje=Registro del curso ingresado con exito");

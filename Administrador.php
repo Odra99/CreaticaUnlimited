@@ -31,7 +31,7 @@ body{
 }
 </style>
 
-  <<?php include("navAdministrador.html"); ?>
+  <?php include("navAdministrador.html"); ?>
 
 
 
