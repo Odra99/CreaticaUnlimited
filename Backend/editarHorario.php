@@ -6,7 +6,7 @@ if(!$_SESSION['user']){
 
   define('USER', 'root');
   $passwordAcceso = include 'ControlAcceso.php';
-  define('PASSWORD', $passwordAcceso);
+  define('PASSWORD', "Inegap11");
   define('HOST', 'localhost');
   define('DATABASE', 'CreaticaUnlimited');
   try {

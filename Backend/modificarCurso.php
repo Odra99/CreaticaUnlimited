@@ -14,7 +14,7 @@ if(!$_SESSION['user']){
   } catch (PDOException $e) {
       exit("Error: " . $e->getMessage());
   }
-  $sql ="UPDATE  CURSO SET nombre='".$_POST['nombre']."' , costo=".$_POST['costo'].", descripcion='".$_POST['descripcion']."' , area='".$_POST['area']."' WHERE nombre=";
+  $sql ="UPDATE  CURSO SET nombre='".$_POST['nombre']."' , descripcion='".$_POST['descripcion']."' , area='".$_POST['area']."' WHERE nombre=";
   $sql.="'".$_POST['nombreAntiguo']."'";
 
 echo "$sql";

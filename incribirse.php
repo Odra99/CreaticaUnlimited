@@ -4,9 +4,8 @@ $codigo=$_POST['codigo'];
 $user=$_SESSION['user'];
 if($user==null){
   header("location: index.php");
-}else if($codigo!=null){
-$sql="INSERT INTO INSCRITO (codigoEstudiante,codigoCurso,estado)";
-$sql.=" VALUES('".$user."' , ".$codigo." , 1);";
+}else if(isset($_POST['codigo'])){
+
 define('USER', 'root');
 $passwordAcceso = include 'ControlAcceso.php';
 define('PASSWORD', $passwordAcceso);
@@ -17,8 +16,14 @@ try {
 } catch (PDOException $e) {
     exit("Error: " . $e->getMessage());
 }
-$connection->query($sql);
-echo $sql;
+$sql="INSERT INTO INSCRITO (codigoEstudiante,codigoCurso,estado) VALUES";
+$sql.="('".$user."' , '".$codigo."' , '1');";
+if($connection->query($sql)){
+
+  header("location: paginaPrincipal.php?mensaje=inscripcion completada");
+}else{
+  header("location: paginaPrincipal.php?mensaje=error No se pudo inscribir");
+  }
 }
-header("location: paginaPrincipal.php");
+  header("location: paginaPrincipal.php?mensaje=");
 ?>

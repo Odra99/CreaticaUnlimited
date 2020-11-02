@@ -25,9 +25,10 @@ if(!$_SESSION['user']){
 
   $resultado2 = $connection->query($sql);
   foreach($resultado2 as $fila2) $curso=$fila2;
-  $sql="SELECT * FROM HORARIOSEMANA WHERE codigo=";
+  $sql="SELECT * FROM `HORARIOSEMANA` WHERE codigo=" ;
     $sql.="'".$_GET['codigo']."'";
-  foreach($resultado2 as $fila2) $curso=$horario;
+    $resultado2 = $connection->query($sql);
+  foreach($resultado2 as $fila2) $horario=$fila2;
 }
 ?>
 <!DOCTYPE html>
@@ -60,11 +61,11 @@ if(!$_SESSION['user']){
 
             <div class="form-group">
               <label><i class="far fa-calendar-alt"></i> Fecha Inicio</label></br>
-             <input type="date" name="fechaInicio" min="<?php echo $curso['fechaInicio'] ?>" value="<?php echo $curso['fechaInicio'] ?>" max="<?php echo $fechaFin?>" required/>
+             <input type="date" name="fechaInicio" value="<?php echo $curso['fechaInicio'] ?>" required/>
             </div>
             <div class="form-group">
             <label><i class="far fa-calendar-alt"></i> Fecha Fin</label></br>
-           <input type="date" name="fechaFin" min="<?php echo $fechaInicio?>" value="<?php echo $curso['fechaFin'] ?>" max="<?php echo $fechaFin?>" required />
+           <input type="date" name="fechaFin"  value="<?php echo $curso['fechaFin'] ?>"  required />
           </div>
           <div class="form-group" style="width: 75%;" >
               <label>Costo Q. </label></br>
@@ -72,7 +73,8 @@ if(!$_SESSION['user']){
                    oninput="setCustomValidity('')" />
           </div>
           <div class="form-group has-feedback">
-            <input class="form-control" placeholder="año" name="year" type="number" maxlength="4" autocomplete="on" required />
+            <label><i class="fas fa-chalkboard"></i> Clases </label></br>
+            <input class="form-control" placeholder="año" name="year" type="number" maxlength="4" value="<?php echo $curso['year']?>" autocomplete="on" required />
           </div>
           </div>
           <div class="col-md-7 col-sm-7  right " style="padding-left: 15%;">
@@ -80,23 +82,23 @@ if(!$_SESSION['user']){
              <p><label><i class="fas fa-chalkboard-teacher"></i> Maestro:</label><br><input style="width:75%;" required type='text'value='<?php echo $_GET['nombreMaestro']?>'  id="nombreMaestro"   readonly></p>
              <div class="form-group">
                <label><i class="fas fa-chalkboard"></i> Clases </label></br>
-              <input type="number" name="clases" min="1" value="<?php echo $curso['clases']?>"required />
+              <input type="number" name="clases" min="1" value="<?php echo $curso['duracion']?>"required />
              </div>
-             <label>Seleccione los dias de clase: </label></br>
+             <label>Seleccione los dias de clase: <?php if(isset($horario['codigo'])){echo "lunes";} ?> </label></br>
             <label for="exampleInputPassword1">Lunes</label>
-            <input  name="L"   type="checkbox" <?php if($horario['lunes']=1){echo "selected";} ?>   value="1" />
+            <input  name="L"   type="checkbox" <?php if($horario['lunes']==1){echo "checked";} ?>   value="1" />
             <label for="exampleInputPassword1">Martes</label>
-            <input  name="M"   type="checkbox"  <?php if($horario['martes']=1){echo "selected";} ?>   value="1" />
+            <input  name="M"   type="checkbox"  <?php if($horario['martes']==1){echo "checked";} ?>   value="1" />
             <label for="exampleInputPassword1">Miercoles</label>
-            <input   name="MM"   type="checkbox" <?php if($horario['miercoles']=1){echo "selected";} ?>     value="1"/>
+            <input   name="MM"   type="checkbox" <?php if($horario['miercoles']==1){echo "checked";} ?>     value="1"/>
             <label for="exampleInputPassword1">Jueves</label>
-            <input   name="J"   type="checkbox"  <?php if($horario['jueves']=1){echo "selected";} ?>    value="1"/>
+            <input   name="J"   type="checkbox"  <?php if($horario['jueves']==1){echo "checked";} ?>    value="1"/>
             <label for="exampleInputPassword1">Viernes</label>
-            <input   name="V"   type="checkbox" <?php if($horario['viernes']=1){echo "selected";} ?>    value="1" />
+            <input   name="V"   type="checkbox" <?php if($horario['viernes']==1){echo "checked";} ?>    value="1" />
             <label for="exampleInputPassword1">Sabado</label>
-            <input   name="S"   type="checkbox"  <?php if($horario['sabado']=1){echo "selected";} ?>    value="1"/>
+            <input   name="S"   type="checkbox"  <?php if($horario['sabado']==1){echo "checked";} ?>    value="1"/>
             <label for="exampleInputPassword1">Domingo</label>
-            <input   name="D"   type="checkbox" <?php if($horario['domingo']=1){echo "selected";} ?>     value="1"/>
+            <input   name="D"   type="checkbox" <?php if($horario['domingo']==1){echo "checked";} ?>     value="1"/>
           </div>
           <div class="col-md-12 align-items-center">
             <input type="text" hidden name="codigo" value="<?php echo $curso['codigo'] ?>"/>

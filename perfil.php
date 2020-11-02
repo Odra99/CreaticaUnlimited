@@ -47,7 +47,7 @@ if(!$_SESSION['user']){
   if($maestro=='MAESTRO'){
      include("navMaestro.html");
   }else{
-     include("navEstudiante.html"); 
+     include("navEstudiante.html");
   }
 
  ?>
@@ -69,11 +69,11 @@ if(!$_SESSION['user']){
               <div class="row">
                 <div class="col">
                   <div class="card-profile-stats d-flex justify-content-center mt-md-5">
-
+<br>
                   </div>
                 </div>
               </div>
-              <div class="text-center">
+              <div class="text-center"><br><br>
                 <h3>
                   <?php echo $usuario['nombre'] ?>  <?php echo $usuario['apellido'] ?><span class="font-weight-light"></span>
                 </h3>

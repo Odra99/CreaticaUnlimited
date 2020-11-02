@@ -15,6 +15,7 @@ if(!$_SESSION['user']){
   }
   $sql ="SELECT * FROM AREA;";
   $resultado = $connection->query($sql);
+  
 }
 
  ?>
@@ -70,7 +71,7 @@ if(!$_SESSION['user']){
                 <?php endforeach; ?>
               </select>
             </div>
-          
+
           </div>
 
           <div class="col-md-6 col-sm-6 col-xs-12 right">

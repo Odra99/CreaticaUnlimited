@@ -17,7 +17,7 @@ if(!$_SESSION['user']){
   $sql.=",hs.jueves,hs.viernes,hs.sabado,hs.domingo, h.duracion ,h.codigo, p.nombre  AS maestro";
   $sql.=" FROM CURSO c INNER JOIN HORARIO h ON c.area=h.area ";
   $sql.="AND h.curso=c.nombre INNER JOIN HORARIOSEMANA hs ON hs.codigo=h.codigo  ";
-  $sql.="INNER JOIN PERFIL p ON h.usuarioMaestro=p.usuario   WHERE h.año=(SELECT YEAR(NOW())) AND (select validarCurso(h.codigo)) ";
+  $sql.="INNER JOIN PERFIL p ON h.usuarioMaestro=p.usuario   WHERE h.year=(SELECT YEAR(NOW())) AND (select validarCurso(h.codigo)) ";
 
 
   if(isset($_POST['buscar']))
@@ -120,7 +120,7 @@ if(!$_SESSION['user']){
 
             <td>
               <form action="incribirse.php" method="post">
-              <input type="text" name="codigo" value="<?php echo $fila['codigo'] ?> " id="" hidden>
+              <input type="text" name="codigo" value="<?php echo $fila['codigo'] ?>" id="" hidden>
 
               <button data-target="#registrar" data-toggle="modal"   type="submit"
                   class="btn btn-block btn-submit" style="width: 140px; font-size: 10px;"
@@ -185,20 +185,6 @@ if(!$_SESSION['user']){
     </div>
   </div>
 
-  <footer id="footer" class="footer">
-    <div class="container text-center">
-      <ul class="social-links">
-        <li><a href="#link"><i class="fa fa-twitter fa-fw"></i></a></li>
-        <li><a href="#link"><i class="fa fa-facebook fa-fw"></i></a></li>
-        <li><a href="#link"><i class="fa fa-google-plus fa-fw"></i></a></li>
-      </ul>
-      @2020 CREATICA Unlimited
-      <div class="credits">
-
-      </div>
-    </div>
-  </footer>
-  <!--/ Footer-->
   <script>
     function getDays(lunes,martes,miercoles,jueves,viernes,sabado,domingo,time){
       verifyDay(lunes,"l");

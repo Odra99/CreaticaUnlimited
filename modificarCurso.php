@@ -77,11 +77,7 @@ if(!$_SESSION['user']){
              <?php endforeach; ?>
            </select>
          </div>
-         <div class="form-group" style="width: 50%;" >
-             <label>Costo Q. </label></br>
-           <input type="number" step="0.01" name="costo" min="0" class="form-control form" value="<?php echo isset($curso['costo']) ? $curso['costo'] : ''; ?>"   required oninvalid="setCustomValidity('Por favor defina el costo del curso')"
-                  oninput="setCustomValidity('')" />
-         </div>
+         
        </div>
        <div class="col-md-6 col-sm-6 col-xs-12 right">
          <div class="form-group">

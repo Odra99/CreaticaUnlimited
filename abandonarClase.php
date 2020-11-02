@@ -16,7 +16,7 @@ if(!$_SESSION['user']){
   $year=$_POST['year'];
   $sql='';
 
-  $sql ="SELECT * FROM INSCRITO I inner JOIN HORARIO H ON H.codigo=I.codigoCurso  WHERE año=(SELECT YEAR(now())) AND I.estado=1 AND I.usuario='".$_SESSION['user']."' ";
+  $sql ="SELECT * FROM INSCRITO I inner JOIN HORARIO H ON H.codigo=I.codigoCurso  WHERE year=(SELECT YEAR(now())) AND I.estado=1 AND I.codigoEstudiante='".$_SESSION['user']."' ";
 
   if(($_POST['buscar'])!=null)
       {

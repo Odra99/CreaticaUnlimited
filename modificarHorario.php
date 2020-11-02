@@ -13,9 +13,9 @@ if(!$_SESSION['user']){
   } catch (PDOException $e) {
       exit("Error: " . $e->getMessage());
   }
-  $sql ="SELECT h.*, c.nombre, concat(p.nombre , ' ',p.apellido)as nombreMaestro FROM HORARIO as h INNER JOIN CURSO as c on h.codigoCurso=c.codigo INNER JOIN PERFIL as p on p.usuario = h.usuarioMaestro ";
+  $sql ="SELECT h.*, c.nombre, concat(p.nombre , ' ',p.apellido)as nombreMaestro FROM HORARIO as h INNER JOIN CURSO as c on h.curso=c.nombre INNER JOIN PERFIL as p on p.usuario = h.usuarioMaestro ";
   if(isset($_POST['nombre'])){
-    $sql=" SELECT h.*, c.nombre, concat(p.nombre , ' ',p.apellido)as nombreMaestro FROM HORARIO as h INNER JOIN CURSO as c on h.codigoCurso=c.codigo INNER JOIN PERFIL as p on p.usuario = h.usuarioMaestro
+    $sql=" SELECT h.*, c.nombre, concat(p.nombre , ' ',p.apellido)as nombreMaestro FROM HORARIO as h INNER JOIN CURSO as c on h.curso=c.nombre INNER JOIN PERFIL as p on p.usuario = h.usuarioMaestro
 where c.nombre LIKE '%".$_POST['nombre']."%'";
   }
   $cont=1;
@@ -66,7 +66,6 @@ where c.nombre LIKE '%".$_POST['nombre']."%'";
          <th scope="col">Fecha Inicio</th>
          <th scope="col">Fecha Fin</th>
          <th scope="col">Clases</th>
-         <th scope="col">Estado</th>
          <th scope="col">Acciones</th>
        </tr>
      </thead>
@@ -79,7 +78,7 @@ where c.nombre LIKE '%".$_POST['nombre']."%'";
             <td><?php echo $fila['nombreMaestro'] ?></td>
             <td><?php echo $fila['fechaInicio'] ?></td>
             <td><?php echo $fila['fechaFin'] ?></td>
-            <td><?php echo $fila['clases'] ?></td>
+            <td><?php echo $fila['duracion'] ?></td>
             <td>
               <input type="hidden" name="nombreMaestro" value="<?php echo $fila['nombreMaestro'] ?>">
               <input type="hidden" name="nombre" value="<?php echo $fila['nombre'] ?>">

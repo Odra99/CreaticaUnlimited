@@ -16,17 +16,18 @@ if(!$_SESSION['user']){
   $year=$_POST['year'];
   $sql='';
   if($year==null){
-    $sql ="SELECT * FROM HORARIO WHERE usuarioMaestro='".$_SESSION['user']."' AND año=(select YEAR(NOW()))";
+    $sql ="SELECT h.*, hs.* FROM HORARIO as h INNER JOIN HORARIOSEMANA as hs ON hs.codigo=h.codigo WHERE usuarioMaestro='".$_SESSION['user']."' AND year=(select YEAR(NOW())) ";
   }else{
-    $sql ="SELECT * FROM HORARIO WHERE usuarioMaestro='".$_SESSION['user']."' AND año='".$year."'";
+    $sql ="SELECT h.*,hs.* FROM HORARIO as h INNER JOIN HORARIOSEMANA as hs ON hs.codigo=h.codigo WHERE usuarioMaestro='".$_SESSION['user']."' AND year='".$year."'";
   }
   if(isset($_POST['buscar']))
       {
         $sql.="AND curso LIKE '%".$_POST['curso']."%'";
       }
-  $sql.="ORDER BY año ASC;";
+  $sql.="ORDER BY year ASC;";
   $resultado = $connection->query($sql);
   $cont =1;
+
 
 }
 ?>
@@ -62,7 +63,7 @@ if(!$_SESSION['user']){
     </div>
     <div style="display:flex;justify-content:center;align-items:center;">
       <div style="width:600px;">
-        <form action="#" method="POST"class="mc-trial row">
+        <form action="cursosMaestro.php" method="POST"class="mc-trial row">
               <div class="form-group col-md-6 col-sm-4">
                 <div class=" controls">
                 <input type="text" name="curso" id="buscar" value="<?php echo isset($_POST['curso']) ? $_POST['curso'] : ''; ?>">
@@ -89,6 +90,7 @@ if(!$_SESSION['user']){
           <th>#</th>
           <th>CURSO</th>
           <th>AREA</th>
+          <th>HORARIO</th>
 
         </tr>
         <?php foreach ($resultado as $fila): ?>
@@ -96,6 +98,13 @@ if(!$_SESSION['user']){
             <td><?php echo $cont; $cont++; ?></td>
             <td><?php echo $fila['curso'] ?></td>
             <td><?php echo $fila['area'] ?></td>
+            <td> <?php if($fila['lunes']==1){echo "Lunes ";};
+            if($fila['martes']==1){echo "Martes ";};
+            if($fila['miercoles']==1){echo "Miercoles ";};
+            if($fila['jueves']==1){echo "Jueves" ;};
+            if($fila['viernes']==1){echo "Viernes" ;};
+            if($fila['sabado']==1){echo "Sabado" ;};
+            if($fila['domingo']==1){echo "Domingo" ;}; ?> </td>
           </tr>
         <?php endforeach; ?>
       </table>

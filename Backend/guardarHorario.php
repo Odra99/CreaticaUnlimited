@@ -6,7 +6,7 @@ if(!$_SESSION['user']){
 
   define('USER', 'root');
   $passwordAcceso = include 'ControlAcceso.php';
-  define('PASSWORD', $passwordAcceso);
+  define('PASSWORD', 'Inegap11');
   define('HOST', 'localhost');
   define('DATABASE', 'CreaticaUnlimited');
   try {
@@ -15,7 +15,7 @@ if(!$_SESSION['user']){
       exit("Error: " . $e->getMessage());
   }
   if(isset($_POST['modificar'])){
-    $sql = "UPDATE  HORARIO SET usuarioMaestro='".$_POST['usuario']."',fechaInicio='".$_POST['fechaInicio']."',fechaFin='".$_POST['fechaFin']."', year='".$_POST['year']."' duracion='".$_POST['clases']."' WHERE codigo='".$_POST['codigo']."'";
+    $sql = "UPDATE  HORARIO SET usuarioMaestro='".$_POST['usuario']."',fechaInicio='".$_POST['fechaInicio']."',fechaFin='".$_POST['fechaFin']."', year='".$_POST['year']."', duracion='".$_POST['clases']."' WHERE codigo='".$_POST['codigo']."'";
     if($connection->query($sql)){
       $lunes=$_POST['L'];
       $martes=$_POST['M'];
