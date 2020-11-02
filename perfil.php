@@ -4,7 +4,7 @@ if(!$_SESSION['user']){
   header("location: index.php");
 }else{
   define('USER', 'root');
-  define('PASSWORD', 'Inegap11');
+  define('PASSWORD', 'Jhon$19PVT');
   define('HOST', 'localhost');
   define('DATABASE', 'CreaticaUnlimited');
   try {

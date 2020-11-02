@@ -5,8 +5,8 @@ $user=$_SESSION['user'];
 if($user==null){
   header("location: index.php");
 }else if($codigo!=null){
-$sql="INSERT INTO INSCRITO (codigoEstudiante,codigoCurso,estado)";
-$sql.=" VALUES('".$user."' , ".$codigo." , 1);";
+$sql="UPDATE INSCRITO SET estado=0 WHERE codigoCurso=".$codigo." ;";
+
 define('USER', 'root');
 define('PASSWORD', 'Jhon$19PVT');
 define('HOST', 'localhost');
@@ -19,5 +19,5 @@ try {
 $connection->query($sql);
 echo $sql;
 }
-header("location: paginaPrincipal.php");  
+header("location: abandonarClase.php");
 ?>

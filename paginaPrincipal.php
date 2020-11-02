@@ -4,7 +4,7 @@ if(!$_SESSION['user']){
   header("location: index.php");
 }else{
   define('USER', 'root');
-  define('PASSWORD', 'Inegap11');
+  define('PASSWORD', 'Jhon$19PVT');
   define('HOST', 'localhost');
   define('DATABASE', 'CreaticaUnlimited');
   try {
@@ -16,7 +16,7 @@ if(!$_SESSION['user']){
   $sql.=",hs.jueves,hs.viernes,hs.sabado,hs.domingo, h.duracion ,h.codigo, p.nombre  AS maestro";
   $sql.=" FROM CURSO c INNER JOIN HORARIO h ON c.area=h.area ";
   $sql.="AND h.curso=c.nombre INNER JOIN HORARIOSEMANA hs ON hs.codigo=h.codigo  ";
-  $sql.="INNER JOIN PERFIL p ON h.usuarioMaestro=p.usuario  WHERE h.año=(SELECT YEAR(NOW())) ";
+  $sql.="INNER JOIN PERFIL p ON h.usuarioMaestro=p.usuario   WHERE h.año=(SELECT YEAR(NOW())) AND (select validarCurso(h.codigo)) ";
 
 
   if(isset($_POST['buscar']))
@@ -63,6 +63,7 @@ if(!$_SESSION['user']){
           <li><a href="Administrador.php">Aux</a></li>
           <li><a href="perfil.php" >Perfil </a></li>
           <li><a href="cerrarSesion.php" >Cerrar sesion   </a></li>
+          <li><a href="abandonarClase.php" >Abandonar Clase   </a></li>
 
         </ul>
       </div>
@@ -137,8 +138,9 @@ if(!$_SESSION['user']){
             </td>
 
             <td>
-              <form action="#" method="post">
+              <form action="incribirse.php" method="post">
               <input type="text" name="codigo" value="<?php echo $fila['codigo'] ?> " id="" hidden>
+
               <button data-target="#registrar" data-toggle="modal"   type="submit"
                   class="btn btn-block btn-submit" style="width: 140px; font-size: 10px;"
                   >
