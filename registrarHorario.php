@@ -75,6 +75,7 @@ if($resultado[0]==1){
 
 
 }
+
 header("location: paginaPrincipalMaestro.php?error=".$resultado[0]);
 
 ?>

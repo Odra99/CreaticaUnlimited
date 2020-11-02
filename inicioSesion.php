@@ -76,6 +76,6 @@ if(isset($_POST['Administrador'])){
     }
 
 }}
-
+echo $sql;
 header("location: ".$url);
 ?>
