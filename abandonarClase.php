@@ -14,9 +14,9 @@ if(!$_SESSION['user']){
   }
   $year=$_POST['year'];
   $sql='';
- 
+
   $sql ="SELECT * FROM INSCRITO I inner JOIN HORARIO H ON H.codigo=I.codigoCurso WHERE año=(SELECT YEAR(now())) AND I.estado=1 ";
- 
+
   if(($_POST['buscar'])!=null)
       {
         $sql.="AND curso LIKE '%".$_POST['curso']."%'";
@@ -84,7 +84,7 @@ if(!$_SESSION['user']){
                 <div class=" controls">
                 <input type="text" name="curso" id="buscar" value="<?php echo isset($_POST['curso']) ? $_POST['curso'] : ''; ?>">
                 </div>
- 
+
 
               </div>
               <!-- End email input -->
@@ -123,7 +123,7 @@ if(!$_SESSION['user']){
                   Abandonar en clase
               </button>
               </form>
-            </td>   
+            </td>
           </tr>
         <?php endforeach; ?>
       </table>
@@ -144,7 +144,7 @@ if(!$_SESSION['user']){
     </div>
   </footer>
   <!--/ Footer-->
- 
+
 
   <script src="js/jquery.min.js"></script>
   <script src="js/jquery.easing.min.js"></script>

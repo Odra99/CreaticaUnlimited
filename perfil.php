@@ -4,7 +4,8 @@ if(!$_SESSION['user']){
   header("location: index.php");
 }else{
   define('USER', 'root');
-  define('PASSWORD', 'Jhon$19PVT');
+  $passwordAcceso = include 'ControlAcceso.php';
+  define('PASSWORD', $passwordAcceso);
   define('HOST', 'localhost');
   define('DATABASE', 'CreaticaUnlimited');
   try {
@@ -16,7 +17,12 @@ if(!$_SESSION['user']){
   $sql.=" WHERE usuario = '".$_SESSION['user']."'";
   $resultado = $connection->query($sql);
    foreach($resultado as $fila) $usuario=$fila;
+   $maestro="ESTUDIANTE";
 
+   $sql ="SELECT * FROM MAESTRO";
+   $sql.=" WHERE usuario = '".$_SESSION['user']."'";
+   $resultado = $connection->query($sql);
+    foreach($resultado as $fila) $maestro="MAESTRO";
 }
 ?>
 <!DOCTYPE html>
@@ -74,26 +80,19 @@ if(!$_SESSION['user']){
                 <div class="col">
                   <div class="card-profile-stats d-flex justify-content-center mt-md-5">
                     <div>
-                      <span class="heading">22</span>
-                      <span class="description">Cursos Terminados</span>
                     </div>
                     <div>
-                      <span class="heading">10</span>
-                      <span class="description">Cursos Activos</span>
                     </div>
-
                   </div>
                 </div>
               </div>
               <div class="text-center">
                 <h3>
-                  <?php echo $usuario['nombre'] ?>  <?php echo $usuario['apellido'] ?><span class="font-weight-light">, 27</span>
+                  <?php echo $usuario['nombre'] ?>  <?php echo $usuario['apellido'] ?><span class="font-weight-light"></span>
                 </h3>
                 <div class="h5 mt-4">
-                  <i class="ni business_briefcase-24 mr-2"></i>Estudiante
+                  <i class="ni business_briefcase-24 mr-2"></i><?php echo $maestro ?>
                 </div>
-
-
               </div>
             </div>
           </div>

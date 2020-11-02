@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 $codigo=$_POST['codigo'];
 $user=$_SESSION['user'];
@@ -19,5 +19,5 @@ try {
 $connection->query($sql);
 echo $sql;
 }
-header("location: paginaPrincipal.php");  
+header("location: paginaPrincipal.php");
 ?>
