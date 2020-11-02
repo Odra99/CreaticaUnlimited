@@ -46,7 +46,7 @@ if(!$_SESSION['user']){
         $domingo=0;
       }
       foreach($resultado as $row ){
-          $sql="UPDATE HORARIOSEMANA SET lunes='".$lunes."',martes='".$martes."',miercoles='".$miercoles."',jueves='".$jueves."',viernes='".$viernes."',sabado='".$sabado."',domingo='".$domingo."' WHERE codigo='"$_POST['codigo']"'";
+          $sql="UPDATE HORARIOSEMANA SET lunes='".$lunes."',martes='".$martes."',miercoles='".$miercoles."',jueves='".$jueves."',viernes='".$viernes."',sabado='".$sabado."',domingo='".$domingo."' WHERE codigo='".$_POST['codigo']."'";
           $connection->query($sql);
         }
       header("location: ../Administrador.php?mensaje=Horario del curso modificado con exito");
@@ -61,6 +61,9 @@ if(!$_SESSION['user']){
      foreach($resultado as $fila) $curso=$fila;
 
      if(isset($curso)){
+       $sql_valid="select validarFechas('".$_POST['fechaInicio']."','".$_POST['fechaFin']."','".$_POST['year']."');";
+       $resultado=$connection->query($sql_valid)->fetchColumn(0);
+       if($resultado[0]==1){
        $sql ="INSERT into HORARIO (usuarioMaestro, fechaInicio, fechaFin, duracion,area, curso, year,costo) VALUES";
        $sql .= "('".$_POST['usuario']."','".$_POST['fechaInicio']."','".$_POST['fechaFin']."','".$_POST['clases']."','".$curso['area']."','".$_POST['nombre']."','".$_POST['year']."','".$_POST['costo']."')";
        if($connection->query($sql)){
@@ -104,6 +107,9 @@ if(!$_SESSION['user']){
          header("location:  ../Administrador.php?mensaje=El registro del curso no se pudo ingresar");
 
        }
+     }else{
+        header("location:  ../Administrador.php?mensaje=El registro del curso no se pudo ingresar");
+     }
      }else{
        header("location:  ../Administrador.php?mensaje=El registro del curso no se pudo ingresar");
 
