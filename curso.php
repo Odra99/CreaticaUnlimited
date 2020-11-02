@@ -1,7 +1,8 @@
 <?php
 define('DB_SERVER', 'localhost');
 define('DB_USER', 'root');
-define('DB_PASSWORD', 'Inegap11');
+$passwordAcceso = include 'ControlAcceso.php';
+define('PASSWORD', $passwordAcceso);
 define('DB_NAME', 'CreaticaUnlimited');
 
 

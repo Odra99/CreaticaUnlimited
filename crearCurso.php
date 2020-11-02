@@ -4,7 +4,8 @@ if(!$_SESSION['user']){
   header("location: index.php");
 }else{
   define('USER', 'root');
-  define('PASSWORD', 'Inegap11');
+  $passwordAcceso = include 'ControlAcceso.php';
+  define('PASSWORD', $passwordAcceso);
   define('HOST', 'localhost');
   define('DATABASE', 'CreaticaUnlimited');
   try {
@@ -69,12 +70,7 @@ if(!$_SESSION['user']){
                 <?php endforeach; ?>
               </select>
             </div>
-            <div class="form-group" style="width: 25%;" >
-                <label>Costo Q. </label></br>
-              <input type="number" step="0.01" name="costo" min="0" class="form-control form" value="<?php echo isset($_GET['costo']) ? $_GET['costo'] : ''; ?>"   required oninvalid="setCustomValidity('Por favor defina el costo del curso')"
-                     oninput="setCustomValidity('')" />
-              <div class="validation"></div>
-            </div>
+
           </div>
 
           <div class="col-md-6 col-sm-6 col-xs-12 right">
@@ -82,7 +78,7 @@ if(!$_SESSION['user']){
               <label>Descripcion</label></br>
               <textarea class="form-control" name="descripcion"  rows="8" required oninvalid="setCustomValidity('Por favor ingrese la descripcion')"
                      oninput="setCustomValidity('')" placeholder="Descripcion"><?php echo isset($_GET['descripcion']) ? $_GET['descripcion'] : ''; ?></textarea>
-              <div class="validation"></div>
+
             </div>
           </div>
 

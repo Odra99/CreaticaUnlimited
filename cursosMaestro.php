@@ -4,7 +4,8 @@ if(!$_SESSION['user']){
   header("location: index.php");
 }else{
   define('USER', 'root');
-  define('PASSWORD', 'Jhon$19PVT');
+  $passwordAcceso = include 'ControlAcceso.php';
+  define('PASSWORD', $passwordAcceso);
   define('HOST', 'localhost');
   define('DATABASE', 'CreaticaUnlimited');
   try {
@@ -15,24 +16,21 @@ if(!$_SESSION['user']){
   $year=$_POST['year'];
   $sql='';
   if($year==null){
-    $sql ="SELECT * FROM HORARIO WHERE usuarioMaestro='".$_SESSION['user']."' AND año=(select YEAR(NOW()))";
+    $sql =" SELECT * FROM HORARIO WHERE usuarioMaestro='".$_SESSION['user']."' AND ciclo=(select YEAR(NOW()))";
   }else{
-    $sql ="SELECT * FROM HORARIO WHERE usuarioMaestro='".$_SESSION['user']."' AND año='".$year."'";
+    $sql =" SELECT * FROM HORARIO WHERE usuarioMaestro='".$_SESSION['user']."' AND ciclo='".$year."'";
   }
   if(isset($_POST['buscar']))
-      {
-        $sql.="AND curso LIKE '%".$_POST['curso']."%'";
-      }
-  $sql.="ORDER BY año ASC;";
-  $resultado = $connection->query($sql);
-  $cont =1;
-
+       {
+         $sql.="AND curso LIKE '%".$_POST['curso']."%'";
+       }
+   $sql.="ORDER BY año ASC;";
+   $resultado = $connection->query($sql);
+   $cont =1;
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -42,11 +40,8 @@ if(!$_SESSION['user']){
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/imagehover.min.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
-
 </head>
-
 <body>
-  <!--Navigation bar-->
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
@@ -64,12 +59,9 @@ if(!$_SESSION['user']){
         <ul class="nav navbar-nav navbar-right">
           <li><a href="paginaPrincipalMaestro.php" >Inicio</a></li>
         </ul>
-
       </div>
     </div>
   </nav>
-
-
   <section id="courses" class="section-padding">
     <div class="container">
       <div class="row">
@@ -82,7 +74,7 @@ if(!$_SESSION['user']){
     </div>
     <div style="display:flex;justify-content:center;align-items:center;">
       <div style="width:600px;">
-        <form action="#" method="POST"class="mc-trial row">
+        <form action="cursosMaestro.php" method="POST"class="mc-trial row">
               <div class="form-group col-md-6 col-sm-4">
                 <div class=" controls">
                 <input type="text" name="curso" id="buscar" value="<?php echo isset($_POST['curso']) ? $_POST['curso'] : ''; ?>">
@@ -91,9 +83,7 @@ if(!$_SESSION['user']){
                   <br>
                   <input class="form-control" placeholder="año del curso"  name="year" type="number" value="<?php echo isset($_POST['year']) ? $_POST['year'] : ''; ?>" autocomplete="on" required />
                 </div>
-
               </div>
-              <!-- End email input -->
               <div class="col-md-6 col-sm-4">
                 <p>
                   <button name="buscar" type="submit" class="btn btn-block btn-submit">
@@ -109,7 +99,6 @@ if(!$_SESSION['user']){
           <th>#</th>
           <th>CURSO</th>
           <th>AREA</th>
-
         </tr>
         <?php foreach ($resultado as $fila): ?>
           <tr>
@@ -121,48 +110,7 @@ if(!$_SESSION['user']){
       </table>
       </div>
   </section>
-  <div class="modal fade" id="login" role="dialog">
-    <div class="modal-dialog modal-sm">
 
-      <!-- Modal content no 1-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title text-center form-title">Crear clase</h4>
-        </div>
-        <div class="modal-body padtrbl">
-         <div class="login-box-body">
-            <p class="login-box-msg">Registrar horario</p>
-            <div class="form-group">
-              <form action="registrarHorario.php" method="post" >
-              <input type="text" hidden name="curso" id="dataCourse" >
-              <input type="text" hidden name="area" id="dataArea"  >
-                <div class="form-group has-feedback">
-                  <input class="form-control" placeholder="Costo" name="costo" type="text" autocomplete="on" required/>
-                </div>
-                <div class="form-group has-feedback">
-                  <input class="form-control" placeholder="año" name="year" type="number" autocomplete="on" required />
-                </div>
-                <div class="form-group has-feedback">
-                  <label for="exampleInputPassword1">Fecha Inicio</label>
-                  <input class="form-control"  name="fechaInicio" type="date" autocomplete="on" required />
-                </div>
-                <div class="form-group has-feedback">
-                  <label for="exampleInputPassword1">Fecha Fin</label>
-                  <input class="form-control"  name="fechaFin" placeholder="fecha fin" type="date" autocomplete="on" required />
-                </div>
-                <div class="row">
-                <div class="col-xs-12">
-                    <button type="submit" class="btn btn-green btn-block btn-flat">Aceptar</button>
-                </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
   <footer id="footer" class="footer">
     <div class="container text-center">
       <ul class="social-links">
@@ -172,11 +120,9 @@ if(!$_SESSION['user']){
       </ul>
       @2020 CREATICA Unlimited
       <div class="credits">
-
       </div>
     </div>
   </footer>
-  <!--/ Footer-->
   <script>
     function applyDatas(element){
      var identificador=element.id.toString();
@@ -189,13 +135,10 @@ if(!$_SESSION['user']){
      e2.setAttribute('value',area);
     }
   </script>
-
   <script src="js/jquery.min.js"></script>
   <script src="js/jquery.easing.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/custom.js"></script>
   <script src="contactform/contactform.js"></script>
-
 </body>
-
 </html>

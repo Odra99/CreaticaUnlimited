@@ -4,7 +4,8 @@ if(!$_SESSION['user']){
   header("location: index.php");
 }else{
   define('USER', 'root');
-  define('PASSWORD', 'Inegap11');
+  $passwordAcceso = include 'ControlAcceso.php';
+  define('PASSWORD', $passwordAcceso);
   define('HOST', 'localhost');
   define('DATABASE', 'CreaticaUnlimited');
   try {
@@ -15,7 +16,7 @@ if(!$_SESSION['user']){
   $sql ="SELECT h.*, c.nombre, concat(p.nombre , ' ',p.apellido)as nombreMaestro FROM HORARIO as h INNER JOIN CURSO as c on h.codigoCurso=c.codigo INNER JOIN PERFIL as p on p.usuario = h.usuarioMaestro ";
   if(isset($_POST['nombre'])){
     $sql=" SELECT h.*, c.nombre, concat(p.nombre , ' ',p.apellido)as nombreMaestro FROM HORARIO as h INNER JOIN CURSO as c on h.codigoCurso=c.codigo INNER JOIN PERFIL as p on p.usuario = h.usuarioMaestro
-where c.nombre LIKE '%".$_POST['nombre']."%'";
+    where c.nombre LIKE '%".$_POST['nombre']."%'";
   }
   $cont=1;
   $resultado = $connection->query($sql);
@@ -82,7 +83,7 @@ where c.nombre LIKE '%".$_POST['nombre']."%'";
             <td><?php echo $fila['estado'] ?></td>
             <td>
               <input type="hidden" name="nombreMaestro" value="<?php echo $fila['nombreMaestro'] ?>">
-<input type="hidden" name="nombre" value="<?php echo $fila['nombre'] ?>">
+              <input type="hidden" name="nombre" value="<?php echo $fila['nombre'] ?>">
                 <input type="hidden" name="estado" value="<?php echo $fila['estado'] ?>">
                 <input type="hidden" name="codigo" value="<?php echo $fila['codigoHorario'] ?>">
                 <input type="submit" name="editar" value="Editar" class="btn btn-sm btn-warning">

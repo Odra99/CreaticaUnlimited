@@ -9,9 +9,7 @@ if(!$_SESSION['user']){
 }
 ?>
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,14 +33,19 @@ if(!$_SESSION['user']){
        <form action="Backend/guardarHorario.php" method="POST" role="form" class="contactForm col-md-12">
          <div class="col-md-5 col-sm-5 col-xs-12 left" style="padding-left: 20%;">
           <p><label>Curso:</label><br><input  required type='text' name='nombre' value='' class='auto'></p>
-
+        <input type="text" hidden name="year" value="<?php echo $year ?>"/>
            <div class="form-group">
              <label><i class="far fa-calendar-alt"></i> Fecha Inicio</label></br>
-            <input type="date" name="fechaInicio" min="<?php echo $fechaInicio ?>" max="<?php echo $fechaFin?>" required/>
+            <input type="date" name="fechaInicio"  required/>
            </div>
            <div class="form-group">
            <label><i class="far fa-calendar-alt"></i> Fecha Fin</label></br>
-          <input type="date" name="fechaFin" min="<?php echo $fechaInicio?>" max="<?php echo $fechaFin?>" required />
+          <input type="date" name="fechaFin"  required />
+         </div>
+         <div class="form-group" style="width: 75%;" >
+             <label>Costo Q. </label></br>
+           <input type="number" step="0.01" name="costo" min="0" class="form-control form" value="<?php echo isset($_GET['costo']) ? $_GET['costo'] : ''; ?>"   required oninvalid="setCustomValidity('Por favor defina el costo del curso')"
+                  oninput="setCustomValidity('')" />
          </div>
          </div>
          <div class="col-md-7 col-sm-7  right " style="padding-left: 15%;">
@@ -52,7 +55,21 @@ if(!$_SESSION['user']){
               <label><i class="fas fa-chalkboard"></i> Clases </label></br>
              <input type="number" name="clases" min="1" required />
             </div>
-
+             <label>Seleccione los dias de clase: </label></br>
+            <label for="exampleInputPassword1">Lunes</label>
+            <input  name="L"   type="checkbox"    value="1" />
+            <label for="exampleInputPassword1">Martes</label>
+            <input  name="M"   type="checkbox"   value="1" />
+            <label for="exampleInputPassword1">Miercoles</label>
+            <input   name="MM"   type="checkbox"   value="1"/>
+            <label for="exampleInputPassword1">Jueves</label>
+            <input   name="J"   type="checkbox"   value="1"/>
+            <label for="exampleInputPassword1">Viernes</label>
+            <input   name="V"   type="checkbox"   value="1" />
+            <label for="exampleInputPassword1">Sabado</label>
+            <input   name="S"   type="checkbox"   value="1"/>
+            <label for="exampleInputPassword1">Domingo</label>
+            <input   name="D"   type="checkbox"   value="1"/>
          </div>
          <div class="col-md-12 align-items-center">
            <button type="submit" class="btn btn-green col-lg-4" style="margin-left:35%;"><i class="far fa-plus-square"></i> Agregar</button>
@@ -71,13 +88,9 @@ if(!$_SESSION['user']){
       $(".auto").autocomplete({
           source: "curso.php",
           minLength: 1
-
       });
 
   });
-
-
-
   $(function() {
       $(".usuario").autocomplete({
           source: "maestroUsuario.php",
@@ -85,18 +98,14 @@ if(!$_SESSION['user']){
       });
   });
   function myfuncion(){
-
        var xmlhttp = new XMLHttpRequest();
      var dbParam =   document.getElementById("usuario").value;
        xmlhttp.onreadystatechange = function() {
-
            var myObj = JSON.parse(this.responseText);
            document.getElementById("nombreMaestro").value = myObj.name;
-
        };
        xmlhttp.open("GET", "maestroNombre.php?term="+dbParam, false);
        xmlhttp.send();
-
   }
   </script>
 </body>

@@ -20,7 +20,8 @@ $curso=$_POST['curso'];
 $area=$_POST['area'];
 $horario=$_POST['duracion'];
 define('USER', 'root');
-define('PASSWORD', 'Jhon$19PVT');
+$passwordAcceso = include 'ControlAcceso.php';
+define('PASSWORD', $passwordAcceso);
 define('HOST', 'localhost');
 define('DATABASE', 'CreaticaUnlimited');
 
